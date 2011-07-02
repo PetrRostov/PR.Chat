@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PR.ChatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="PRChatModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="PR.ChatModel.Store.Accounts" store:Type="Tables" Schema="Portal" />
+          <EntitySet Name="Channels" EntityType="PR.ChatModel.Store.Channels" store:Type="Tables" Schema="Portal" />
+          <EntitySet Name="Messages" EntityType="PR.ChatModel.Store.Messages" store:Type="Tables" Schema="Portal" />
+          <EntitySet Name="Nicks" EntityType="PR.ChatModel.Store.Nicks" store:Type="Tables" Schema="Portal" />
+          <EntitySet Name="NicksChannels" EntityType="PR.ChatModel.Store.NicksChannels" store:Type="Tables" Schema="Portal" />
+          <AssociationSet Name="FK_Channels_Nicks" Association="PR.ChatModel.Store.FK_Channels_Nicks">
+            <End Role="Nicks" EntitySet="Nicks" />
+            <End Role="Channels" EntitySet="Channels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nicks_Accounts" Association="PR.ChatModel.Store.FK_Nicks_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Nicks" EntitySet="Nicks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NicksChannels_Channels" Association="PR.ChatModel.Store.FK_NicksChannels_Channels">
+            <End Role="Channels" EntitySet="Channels" />
+            <End Role="NicksChannels" EntitySet="NicksChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NicksChannels_Nicks" Association="PR.ChatModel.Store.FK_NicksChannels_Nicks">
+            <End Role="Nicks" EntitySet="Nicks" />
+            <End Role="NicksChannels" EntitySet="NicksChannels" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="PasswordHash" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Channels">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="1024" />
+          <Property Name="IsHidden" Type="bit" Nullable="false" />
+          <Property Name="IsTemporary" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Nicks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="Settings" Type="varbinary" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NicksChannels">
+          <Key>
+            <PropertyRef Name="ChannelID" />
+            <PropertyRef Name="NickID" />
+          </Key>
+          <Property Name="ChannelID" Type="int" Nullable="false" />
+          <Property Name="NickID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Channels_Nicks">
+          <End Role="Nicks" Type="PR.ChatModel.Store.Nicks" Multiplicity="1" />
+          <End Role="Channels" Type="PR.ChatModel.Store.Channels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nicks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Channels">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nicks_Accounts">
+          <End Role="Accounts" Type="PR.ChatModel.Store.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nicks" Type="PR.ChatModel.Store.Nicks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Nicks">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NicksChannels_Channels">
+          <End Role="Channels" Type="PR.ChatModel.Store.Channels" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NicksChannels" Type="PR.ChatModel.Store.NicksChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channels">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NicksChannels">
+              <PropertyRef Name="ChannelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NicksChannels_Nicks">
+          <End Role="Nicks" Type="PR.ChatModel.Store.Nicks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NicksChannels" Type="PR.ChatModel.Store.NicksChannels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nicks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NicksChannels">
+              <PropertyRef Name="NickID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PR.ChatModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ChatDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="PR.ChatModel.Account" />
+          <EntitySet Name="Channels" EntityType="PR.ChatModel.Channel" />
+          <EntitySet Name="Messages" EntityType="PR.ChatModel.Messages" />
+          <EntitySet Name="Nicks" EntityType="PR.ChatModel.Nick" />
+          <AssociationSet Name="FK_Nicks_Accounts" Association="PR.ChatModel.FK_Nicks_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Nicks" EntitySet="Nicks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Channels_Nicks" Association="PR.ChatModel.FK_Channels_Nicks">
+            <End Role="Nicks" EntitySet="Nicks" />
+            <End Role="Channels" EntitySet="Channels" />
+          </AssociationSet>
+          <AssociationSet Name="NicksChannels" Association="PR.ChatModel.NicksChannels">
+            <End Role="Channels" EntitySet="Channels" />
+            <End Role="Nicks" EntitySet="Nicks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Nicks" Relationship="PR.ChatModel.FK_Nicks_Accounts" FromRole="Accounts" ToRole="Nicks" />
+        </EntityType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
+          <Property Name="IsTemporary" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Owner" Relationship="PR.ChatModel.FK_Channels_Nicks" FromRole="Channels" ToRole="Nicks" />
+          <NavigationProperty Name="Nicks" Relationship="PR.ChatModel.NicksChannels" FromRole="Channels" ToRole="Nicks" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Nick">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AccountID" Nullable="false" Type="Int32" />
+          <Property Name="SettingsBinary" Nullable="false" annotation:StoreGeneratedPattern="None" Type="Binary" />
+          <Property Name="CreatedAt" Nullable="false" Type="DateTime" />
+          <NavigationProperty Name="Account" Relationship="PR.ChatModel.FK_Nicks_Accounts" FromRole="Nicks" ToRole="Accounts" />
+        </EntityType>
+        <Association Name="FK_Nicks_Accounts">
+          <End Role="Accounts" Type="PR.ChatModel.Account" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nicks" Type="PR.ChatModel.Nick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Nicks">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Channels_Nicks">
+          <End Role="Nicks" Type="PR.ChatModel.Nick" Multiplicity="1" />
+          <End Role="Channels" Type="PR.ChatModel.Channel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nicks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Channels">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NicksChannels">
+          <End Role="Channels" Type="PR.ChatModel.Channel" Multiplicity="*" />
+          <End Role="Nicks" Type="PR.ChatModel.Nick" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PRChatModelStoreContainer" CdmEntityContainer="ChatDB">
+          <EntitySetMapping Name="Accounts"><EntityTypeMapping TypeName="PR.ChatModel.Account"><MappingFragment StoreEntitySet="Accounts">
+            <ScalarProperty Name="Id" ColumnName="ID" />
+            <ScalarProperty Name="Login" ColumnName="Login" />
+            <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Channels"><EntityTypeMapping TypeName="PR.ChatModel.Channel"><MappingFragment StoreEntitySet="Channels">
+            <ScalarProperty Name="Id" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+            <ScalarProperty Name="Subject" ColumnName="Subject" />
+            <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+            <ScalarProperty Name="IsTemporary" ColumnName="IsTemporary" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+            <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Messages"><EntityTypeMapping TypeName="PR.ChatModel.Messages"><MappingFragment StoreEntitySet="Messages">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Nicks"><EntityTypeMapping TypeName="PR.ChatModel.Nick"><MappingFragment StoreEntitySet="Nicks">
+            <ScalarProperty Name="Id" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+            <ScalarProperty Name="SettingsBinary" ColumnName="Settings" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="NicksChannels" TypeName="PR.ChatModel.NicksChannels" StoreEntitySet="NicksChannels">
+            <EndProperty Name="Channels">
+              <ScalarProperty Name="Id" ColumnName="ChannelID" />
+            </EndProperty>
+            <EndProperty Name="Nicks">
+              <ScalarProperty Name="Id" ColumnName="NickID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Chat" ZoomLevel="74">
+        <EntityTypeShape EntityType="PR.ChatModel.Account" Width="1.5" PointX="0.75" PointY="1.625" Height="1.9802864583333339" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR.ChatModel.Channel" Width="1.5" PointX="5.25" PointY="1" Height="2.9417936197916661" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR.ChatModel.Messages" Width="1.5" PointX="7.25" PointY="1" Height="1.2110807291666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="PR.ChatModel.Nick" Width="1.5" PointX="3" PointY="1.25" Height="2.172587890625" IsExpanded="true" />
+        <AssociationConnector Association="PR.ChatModel.FK_Nicks_Accounts" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.5237939453125" />
+          <ConnectorPoint PointX="3" PointY="2.5237939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="PR.ChatModel.FK_Channels_Nicks" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.5081505330403639" />
+          <ConnectorPoint PointX="5.25" PointY="2.5081505330403639" />
+        </AssociationConnector>
+        <AssociationConnector Association="PR.ChatModel.NicksChannels" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="1.816575266520182" />
+          <ConnectorPoint PointX="4.5" PointY="1.816575266520182" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

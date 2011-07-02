@@ -1,0 +1,9 @@
+/_ReSharper.Chat
+/Chat.5.0.ReSharper.user
+
+*/bin
+*/obj
+
+*.suo
+*.ReSharper
+*.user
