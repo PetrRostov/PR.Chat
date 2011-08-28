@@ -7,3 +7,5 @@
 *.suo
 *.ReSharper
 *.user
+/Local.testsettings
+/ThirdPartySources/EmitMapper/_ReSharper.EmitMapper

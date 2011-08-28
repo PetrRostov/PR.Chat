@@ -5,7 +5,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Core", "PR.Chat.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.DAL", "PR.Chat.DAL\PR.Chat.DAL.csproj", "{73AE2137-48A7-414F-9E69-9F4A10D88A86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Domain", "PR.Chat.Domain\PR.Chat.Domain.csproj", "{18615872-D14D-450B-9980-7DDF41885C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Infrastructure", "PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj", "{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BBD0A985-F191-4A32-969A-EC033EC17AC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Domain.Tests", "PR.Chat.Domain.Tests\PR.Chat.Domain.Tests.csproj", "{1E94FA4D-2327-4283-BC86-CE404F0E00E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1A48028-EDC1-4DDC-8229-BBF7DC3B47F1}"
+	ProjectSection(SolutionItems) = preProject
+		Chat.vsmdi = Chat.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Chat.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -19,8 +37,24 @@ Global
 		{73AE2137-48A7-414F-9E69-9F4A10D88A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73AE2137-48A7-414F-9E69-9F4A10D88A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73AE2137-48A7-414F-9E69-9F4A10D88A86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18615872-D14D-450B-9980-7DDF41885C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18615872-D14D-450B-9980-7DDF41885C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18615872-D14D-450B-9980-7DDF41885C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18615872-D14D-450B-9980-7DDF41885C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E94FA4D-2327-4283-BC86-CE404F0E00E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E94FA4D-2327-4283-BC86-CE404F0E00E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E94FA4D-2327-4283-BC86-CE404F0E00E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E94FA4D-2327-4283-BC86-CE404F0E00E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E94FA4D-2327-4283-BC86-CE404F0E00E4} = {BBD0A985-F191-4A32-969A-EC033EC17AC7}
+		{A1A48028-EDC1-4DDC-8229-BBF7DC3B47F1} = {BBD0A985-F191-4A32-969A-EC033EC17AC7}
 	EndGlobalSection
 EndGlobal

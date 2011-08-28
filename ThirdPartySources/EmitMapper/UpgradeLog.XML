@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="EmitMapper">
+</Property><Property Name="Solution File" Value="D:\PEET\Chat\ThirdPartySources\EmitMapper\EmitMapper.sln">
+</Property><Property Name="Date" Value="3 июля 2011 г.">
+</Property><Property Name="Time" Value="14:27">
+</Property></Properties><Event ErrorLevel="0" Project="SamplesTests" Source="SamplesTests\SamplesTests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SamplesTests" Source="SamplesTests\SamplesTests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="LightDataAccess" Source="Samples\LightDataAccess\LightDataAccess.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="LightDataAccess" Source="Samples\LightDataAccess\LightDataAccess.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EMConfigurations" Source="Samples\EMConfigurations\EMConfigurations.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EMConfigurations" Source="Samples\EMConfigurations\EMConfigurations.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EmitMapper" Source="EmitMapper\EmitMapper.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EmitMapper" Source="EmitMapper\EmitMapper.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Benchmarks" Source="Benchmarks\Benchmarks.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Benchmarks" Source="Benchmarks\Benchmarks.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EmitMapper.Mvc.Net" Source="Samples\EmitMapper.Mvc.Net\EmitMapper.Mvc.Net.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EmitMapper.Mvc.Net" Source="Samples\EmitMapper.Mvc.Net\EmitMapper.Mvc.Net.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EmitMapperTests.NUnit" Source="EmitMapperTests.NUnit\EmitMapperTests.NUnit.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="EmitMapperTests.NUnit" Source="EmitMapperTests.NUnit\EmitMapperTests.NUnit.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="EmitMapper.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="EmitMapper.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="EmitMapper.Mvc.Net" Source="Samples\EmitMapper.Mvc.Net\EmitMapper.Mvc.Net.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="SamplesTests" Source="SamplesTests\SamplesTests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="LightDataAccess" Source="Samples\LightDataAccess\LightDataAccess.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EMConfigurations" Source="Samples\EMConfigurations\EMConfigurations.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Benchmarks" Source="Benchmarks\Benchmarks.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EmitMapper" Source="EmitMapper\EmitMapper.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="EmitMapperTests.NUnit" Source="EmitMapperTests.NUnit\EmitMapperTests.NUnit.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
