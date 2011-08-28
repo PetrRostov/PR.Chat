@@ -4,8 +4,26 @@
 */bin
 */obj
 
+/*/bin
+/*/obj
+/*/*/bin
+/*/*/obj
+/*/*/*/bin
+/*/*/*/obj
+/*/*/*/*/bin
+/*/*/*/*/obj
+/*/*/*/*/*/bin
+/*/*/*/*/*/obj
+/*/*/*/*/*/*/bin
+/*/*/*/*/*/*/obj
+/*/*/*/*/*/*/*/bin
+/*/*/*/*/*/*/*/obj
+
 *.suo
 *.ReSharper
 *.user
+
 /Local.testsettings
 /ThirdPartySources/EmitMapper/_ReSharper.EmitMapper
+/ThirdPartySources/EmitMapper/*/obj
+/ThirdPartySources/EmitMapper/*/bin
