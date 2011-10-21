@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{061A0E22-7062-4AAB-908E-5B87927D14FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PR.Chat.Infrastructure.Data.NH.Tests</RootNamespace>
+    <AssemblyName>PR.Chat.Infrastructure.Data.NH.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\References\Sign\pr.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\References\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\References\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.74.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\References\Sqlite\System.Data.SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseMappingFixtures.cs" />
+    <Compile Include="DatabaseFixtures.cs" />
+    <Compile Include="Mapping\UserMappingFixtures.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
+      <Project>{18615872-D14D-450B-9980-7DDF41885C61}</Project>
+      <Name>PR.Chat.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure.Data.NH\PR.Chat.Infrastructure.Data.NH.csproj">
+      <Project>{17E72A9F-D04B-4A76-80A6-F73F3C43F773}</Project>
+      <Name>PR.Chat.Infrastructure.Data.NH</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure.Data\PR.Chat.Infrastructure.Data.csproj">
+      <Project>{46A17C22-604E-4439-B5B7-A5D95DD8B338}</Project>
+      <Name>PR.Chat.Infrastructure.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
+      <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
+      <Name>PR.Chat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Test.Common\PR.Chat.Test.Common.csproj">
+      <Project>{C299E429-A7E1-47F7-B228-CAD42CEB989B}</Project>
+      <Name>PR.Chat.Test.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\References\Sign\pr.snk">
+      <Link>pr.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\References\Sqlite\System.Data.SQLite\x64\SQLite.Interop.dll">
+      <Link>SQLite.Interop.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

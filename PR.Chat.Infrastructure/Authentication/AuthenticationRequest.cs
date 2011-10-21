@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PR.Chat.Core.Authentication
+namespace PR.Chat.Infrastructure.Authentication
 {
     public class AuthenticationRequest
     {

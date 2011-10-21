@@ -1,14 +1,13 @@
 ﻿using System;
-using PR.Chat.Core.DependencyResolver;
 
-namespace PR.Chat.Core.Authentication
+namespace PR.Chat.Infrastructure.Authentication
 {
     public interface IAuthenticationProviderFactory
     {
-        IAutenticationProvider Create(AuthenticationMethod method);
+        IAuthenticationProvider Create(AuthenticationMethod method);
     }
 
-    class AuthenticationProviderFactoryByDependencyResolver : IAuthenticationProviderFactory
+    public class AuthenticationProviderFactoryByDependencyResolver : IAuthenticationProviderFactory
     {
         private readonly IDependencyResolver _dependencyResolver;
 
@@ -19,12 +18,12 @@ namespace PR.Chat.Core.Authentication
             _dependencyResolver = dependencyResolver;
         }
 
-        public IAutenticationProvider Create(AuthenticationMethod method)
+        public IAuthenticationProvider Create(AuthenticationMethod method)
         {
             switch (method)
             {
                 case AuthenticationMethod.ByPass :
-                    return _dependencyResolver.Resolve<IAutenticationProvider>(ByPassProviderKey);
+                    return _dependencyResolver.Resolve<IAuthenticationProvider>(ByPassProviderKey);
                 default:
                     throw new ArgumentException();
             }

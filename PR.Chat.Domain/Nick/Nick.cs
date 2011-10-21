@@ -1,17 +1,24 @@
 ﻿using System;
+using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
 {
-    public class Nick : IEntity<Nick>
+    public class Nick : IEntity<Nick, Guid>
     {
+        private readonly User _user;
         private readonly string _name;
         private readonly Guid _id;
 
+        protected Nick()
+        {
+            // For NHibernate
+        }
 
         internal Nick(User user, string name)
         {
-            this._name = name;
-            this._id = Guid.NewGuid();
+            _user = user;
+            _name = name;
+            _id = Guid.NewGuid();
         }
 
         public virtual string Name      

@@ -3,38 +3,44 @@ using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
 {
-    public class User : IEntity<User>
+    public class User : IEntity<User, Guid>
     {
         private readonly Guid _id;
         private readonly string _name;
-        private readonly string _password;
-
-        protected User() {}
+        private string _password;
+        private readonly bool _isRegistered;
 
         public virtual Guid Id { get { return _id; } }
 
         public virtual string Name { get { return _name; }  }
 
-        
+        public virtual bool IsRegistered  { get { return _isRegistered; } }
+
+
+        protected User() 
+        {
+            // For NHibernate
+        }
+
         internal User(
             string name, 
-            string password
-        )
+            string password, bool isRegistered)
         {
             Check.NotNullOrEmpty(name, "name");
             Check.NotNullOrEmpty(password, "password");
 
             _name = name;
             _password = password;
+            _isRegistered = isRegistered;
             _id = Guid.NewGuid();
         }
 
-        public bool IsPasswordEqual(string password)
+        public virtual bool IsPasswordEqual(string password)
         {
             return _password == password;
         }
 
-        public bool SameIdentityAs(User other)
+        public virtual bool SameIdentityAs(User other)
         {
             return other != null && other.Name.Equals(Name, StringComparison.InvariantCultureIgnoreCase);
         }
@@ -53,9 +59,17 @@ namespace PR.Chat.Domain
             return SameIdentityAs((User) obj);
         }
 
-        public Nick CreateNick(string name)
+        public virtual Nick CreateNick(string name)
         {
+            Check.NotNullOrEmpty(name, "name");
+
             return new Nick(this, name);
+        }
+
+        public virtual void SetPassword(string password)
+        {
+            Check.NotNullOrEmpty(password, "password");
+            _password = password;
         }
     }
 }

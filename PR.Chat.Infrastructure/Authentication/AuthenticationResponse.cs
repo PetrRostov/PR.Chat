@@ -1,6 +1,4 @@
-﻿using PR.Chat.Core.BusinessObjects;
-
-namespace PR.Chat.Core.Authentication
+﻿namespace PR.Chat.Infrastructure.Authentication
 {
     public class AuthenticationResponse
     {

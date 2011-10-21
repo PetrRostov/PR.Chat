@@ -1,12 +1,9 @@
 using System;
 using System.Diagnostics.Contracts;
-using PR.Chat.Core.BusinessObjects;
-using PR.Chat.Core.Resources;
-using PR.Chat.Core.Services;
 
-namespace PR.Chat.Core.Authentication
+namespace PR.Chat.Infrastructure.Authentication
 {
-    public class ByPassAuthenticationProvider : IAutenticationProvider
+    public class ByPassAuthenticationProvider : IAuthenticationProvider
     {
         private readonly IAccountService _accountService;
         
@@ -45,5 +42,34 @@ namespace PR.Chat.Core.Authentication
                 return AuthenticationResponse.Error("WrongPassword");
             }
         }
+    }
+
+    public interface IAccountService
+    {
+        AuthResult Auth(string login, string password);
+    }
+
+    public class AuthResult
+    {
+        private IAccount _account;
+
+        public IAccount Account
+        {
+            get {
+                return _account;
+            }
+        }
+    }
+
+    public interface IAccount
+    {
+    }
+
+    public class WrongPasswordException : Exception
+    {
+    }
+
+    public class LoginNotFoundException : Exception
+    {
     }
 }

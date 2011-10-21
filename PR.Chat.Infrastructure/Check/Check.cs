@@ -12,8 +12,11 @@ namespace PR.Chat.Infrastructure
 
         public static void NotNullOrEmpty(string obj, string name)
         {
-            if (string.IsNullOrEmpty(obj))
-                throw new ArgumentException(string.Format("{0} should not be null or not be emty", name));
+            NotNull(obj, name);
+
+            if (obj.Equals(string.Empty))
+                throw new ArgumentException(string.Format("{0} should not be empty", name));
+                
         }
     }
 }
