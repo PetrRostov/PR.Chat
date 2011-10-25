@@ -26,6 +26,11 @@ namespace PR.Chat.Domain
             get { return _name; }
         }
 
+        public virtual User User
+        {
+            get { return _user; }
+        }
+
         public virtual Guid Id
         {
             get {
@@ -33,7 +38,7 @@ namespace PR.Chat.Domain
             }
         }
 
-        public bool SameIdentityAs(Nick other)
+        public virtual bool SameIdentityAs(Nick other)
         {
             return other != null && Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase);
         }

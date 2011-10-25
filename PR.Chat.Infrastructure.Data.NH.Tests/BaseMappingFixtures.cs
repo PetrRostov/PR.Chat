@@ -28,6 +28,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
                     .SetProperty(Environment.ConnectionDriver, typeof(SQLite20Driver).AssemblyQualifiedName)
                     .SetProperty(Environment.ConnectionString, "data source=:memory:")
                     .SetProperty(Environment.ProxyFactoryFactoryClass, typeof(DefaultProxyFactoryFactory).AssemblyQualifiedName)
+                    .SetProperty(Environment.ShowSql, "true")
                     .AddAssembly(assemblyContainingMapping);
 
                 _sessionFactory = _configuration.BuildSessionFactory();
@@ -40,7 +41,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
                 true, 
                 false, 
                 Session.Connection, 
-                File.CreateText("C:\\schema.sql")
+                Console.Out
             );  
         }
 

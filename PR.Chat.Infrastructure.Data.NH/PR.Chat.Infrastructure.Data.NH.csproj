@@ -37,10 +37,6 @@
     <AssemblyOriginatorKeyFile>..\References\Sign\pr.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate">
-      <HintPath>..\References\NHibernate\FluentNHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate">
       <HintPath>..\References\NHibernate\NHibernate.dll</HintPath>
@@ -57,10 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INHibernateDatabaseConfigurator.cs" />
+    <Compile Include="MsSql2008NHibernateDatabaseConfigurator.cs" />
     <Compile Include="NHibernateDatabase.cs" />
     <EmbeddedResource Include="Mapping\User.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="NHibernateDatabaseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +84,11 @@
     <None Include="..\References\Sign\pr.snk">
       <Link>pr.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\Nick.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

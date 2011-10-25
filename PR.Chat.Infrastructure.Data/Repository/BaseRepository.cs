@@ -41,7 +41,7 @@ namespace PR.Chat.Infrastructure.Data
             _database.DeleteOnSubmit(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _database.UpdateOnSubmit(entity);
         }

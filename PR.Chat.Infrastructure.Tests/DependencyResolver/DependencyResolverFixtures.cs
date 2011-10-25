@@ -66,7 +66,7 @@ namespace PR.Chat.Infrastructure.Tests
         }
 
         [Test]
-        public void Generic_Resolve_all_should_return_right_result()
+        public void Generic_ResolveAll_should_return_right_result()
         {
             var result = DependencyResolver.ResolveAll<IList<string>>();
             Assert.AreSame(result, _resolveAllObject);

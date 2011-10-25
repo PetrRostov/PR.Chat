@@ -57,7 +57,10 @@
   <ItemGroup>
     <Compile Include="BaseMappingFixtures.cs" />
     <Compile Include="DatabaseFixtures.cs" />
+    <Compile Include="Mapping\NickMappingFixtures.cs" />
     <Compile Include="Mapping\UserMappingFixtures.cs" />
+    <Compile Include="MsSql2008NHibernateDatabaseConfiguratorFixtures.cs" />
+    <Compile Include="NHibernateDatabaseFactoryFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

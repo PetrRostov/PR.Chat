@@ -42,21 +42,21 @@ namespace PR.Chat.Infrastructure.Castle
             return _windsorContainer.ResolveAll<T>();
         }
 
-        protected void Dispose(bool disposed)
+        protected void Dispose(bool disposing)
         {
-            if (disposed && _windsorContainer != null)
+            if (disposing && _windsorContainer != null)
                 _windsorContainer.Dispose();
         }
 
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         ~WindsorContainerAdapter()
         {
             Dispose(false);
-            GC.SuppressFinalize(this);
         }
     }
 }

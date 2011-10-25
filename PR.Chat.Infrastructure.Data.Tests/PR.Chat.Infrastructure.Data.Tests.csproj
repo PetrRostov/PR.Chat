@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="BaseRepositoryFixtures.cs" />
     <Compile Include="BaseRepositoryImpl.cs" />
+    <Compile Include="ConnectionStringProviderFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWorkFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PR.Chat.Infrastructure.Data\PR.Chat.Infrastructure.Data.csproj">
@@ -61,6 +63,11 @@
       <Project>{C299E429-A7E1-47F7-B228-CAD42CEB989B}</Project>
       <Name>PR.Chat.Test.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

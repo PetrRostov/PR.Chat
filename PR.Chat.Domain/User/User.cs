@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
@@ -9,10 +10,13 @@ namespace PR.Chat.Domain
         private readonly string _name;
         private string _password;
         private readonly bool _isRegistered;
+        private readonly IEnumerable<Nick> _nicks;
 
         public virtual Guid Id { get { return _id; } }
 
         public virtual string Name { get { return _name; }  }
+
+        public virtual IEnumerable<Nick> Nicks { get { return _nicks; } }
 
         public virtual bool IsRegistered  { get { return _isRegistered; } }
 

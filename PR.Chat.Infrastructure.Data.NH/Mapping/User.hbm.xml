@@ -10,9 +10,14 @@
       <id name="Id" column="Id" type="Guid" >
          <generator class="assigned"/>
       </id>
-      <property name="Name" column="Name" type="String" not-null="true" unique="true" />
+      <property name="Name" column="Name" type="String" not-null="true" unique="true" update="false"/>
       <property name="_password" column="Password" type="String" not-null="true" access="field"/>
-      <property name="IsRegistered" column="IsRegistered" type="Boolean" not-null="true" />
+      <property name="IsRegistered" column="IsRegistered" type="Boolean" not-null="true" update="false"/>
+      <set name="Nicks" fetch="join" mutable="false" inverse ="true"  cascade="all" lazy="false">
+         <key column="UserId" not-null="true" />
+         <one-to-many class="Nick" not-found="ignore" />
+      </set>
+      
    </class>
    
 </hibernate-mapping>

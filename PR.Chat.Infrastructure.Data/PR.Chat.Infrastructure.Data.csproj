@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,14 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityNotFoundException.cs" />
+    <Compile Include="ConnectionStringProvider.cs" />
+    <Compile Include="Exceptions\ConnectionStringNotFoundException.cs" />
+    <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="IConnectionStringProvider.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="TransactionAlreadyStartedException.cs" />
-    <Compile Include="TransactionInactiveException.cs" />
+    <Compile Include="Exceptions\TransactionAlreadyStartedException.cs" />
+    <Compile Include="Exceptions\TransactionInactiveException.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\References\Sign\pr.snk">

@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace PR.Chat.Infrastructure
 {
-    public class DependencyResolver
+    public static class DependencyResolver
     {
         private static IDependencyResolver _resolver;
 
@@ -12,6 +12,12 @@ namespace PR.Chat.Infrastructure
         {
             Check.NotNull(dependencyResolver, "dependencyResolver");
             _resolver = dependencyResolver;
+        }
+
+        public static void InitializeWith(IDependencyResolverFactory dependencyResolverFactory)
+        {
+            Check.NotNull(dependencyResolverFactory, "dependencyResolverFactory");
+            _resolver = dependencyResolverFactory.Create();
         }
 
         [DebuggerStepThrough]

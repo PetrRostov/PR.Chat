@@ -63,6 +63,7 @@ namespace PR.Chat.Infrastructure.Data.NH
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected void Dispose(bool disposed)
@@ -74,7 +75,6 @@ namespace PR.Chat.Infrastructure.Data.NH
         ~NHibernateDatabase()
         {
             Dispose(false);
-            GC.SuppressFinalize(this);
         }
     }
 }
