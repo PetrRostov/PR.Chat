@@ -3,46 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PR.Chat.Domain
+namespace PR.Chat.Infrastructure
 {
-    #region Usings
-
-    
-
-    #endregion
-
     public abstract class Enumeration : IComparable
     {
-        private string displayName;
-        private string value;
+        private readonly string _displayName;
+        private readonly string _value;
 
         protected Enumeration(string value)
         {
-            this.value = value;
-            displayName = value;
+            _value = value;
+            _displayName = value;
         }
 
         protected Enumeration(string value, string displayName)
         {
-            this.value = value;
-            this.displayName = displayName;
+            _value = value;
+            _displayName = displayName;
         }
 
         public string Value
         {
-            get { return value; }
+            get { return _value; }
         }
 
         public string DisplayName
         {
-            get { return displayName; }
+            get { return _displayName; }
         }
 
         #region IComparable Members
 
         public int CompareTo(object other)
         {
-            return Value.CompareTo(((Enumeration) other).Value);
+            return Value.CompareTo(((Enumeration)other).Value);
         }
 
         #endregion
@@ -54,19 +48,12 @@ namespace PR.Chat.Domain
 
         public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
-            var type = typeof (T);
+            var type = typeof(T);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
-            foreach (var info in fields)
-            {
-                //var instance = Activator.CreateInstance(typeof(T));
-                var locatedValue = info.GetValue(null) as T;
-
-                if (locatedValue != null)
-                {
-                    yield return locatedValue;
-                }
-            }
+            return fields
+                .Select(info => info.GetValue(null))
+                .OfType<T>();
         }
 
         public override bool Equals(object obj)
@@ -79,35 +66,35 @@ namespace PR.Chat.Domain
             }
 
             var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = value.Equals(otherValue.Value);
+            var valueMatches = _value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
         }
 
         public override int GetHashCode()
         {
-            return value.GetHashCode();
+            return _value.GetHashCode();
         }
 
         public static T FromValue<T>(string value) where T : Enumeration
         {
-            var matchingItem = parse<T, string>(value, "value", item => item.Value == value);
+            var matchingItem = Parse<T, string>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration
         {
-            var matchingItem = parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
+            var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
             return matchingItem;
         }
 
-        private static T parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration
+        private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
             if (matchingItem == null)
             {
-                var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof (T));
+                var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(T));
                 throw new ApplicationException(message);
             }
 

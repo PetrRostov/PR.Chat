@@ -10,13 +10,13 @@ namespace PR.Chat.Domain
         private readonly string _name;
         private string _password;
         private readonly bool _isRegistered;
-        private readonly IEnumerable<Nick> _nicks;
+        private readonly ICollection<Nick> _nicks = new HashSet<Nick>();
 
         public virtual Guid Id { get { return _id; } }
 
         public virtual string Name { get { return _name; }  }
 
-        public virtual IEnumerable<Nick> Nicks { get { return _nicks; } }
+        public virtual ICollection<Nick> Nicks { get { return _nicks; } }
 
         public virtual bool IsRegistered  { get { return _isRegistered; } }
 
@@ -36,7 +36,7 @@ namespace PR.Chat.Domain
             _name = name;
             _password = password;
             _isRegistered = isRegistered;
-            _id = Guid.NewGuid();
+            //_id = Guid.NewGuid();
         }
 
         public virtual bool IsPasswordEqual(string password)

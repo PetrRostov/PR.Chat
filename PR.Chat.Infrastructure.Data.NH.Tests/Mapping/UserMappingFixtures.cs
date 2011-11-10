@@ -50,9 +50,24 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick2.Name));
 
 
-                Session.Delete(loadedUser);
+                loadedUser.SetPassword("opa");
+
                 tran.Commit();
             }
+
+            Session.Clear();
+
+            using (var tran = Session.BeginTransaction())
+            {
+                var loadedUser = Session.Query<User>().Where(u => u.Name == user.Name).First();
+
+                Assert.True(loadedUser.IsPasswordEqual("opa"));
+
+                Session.Delete(loadedUser);
+
+                tran.Commit();
+            }
+
 
         }
     }

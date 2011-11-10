@@ -8,7 +8,7 @@
 
    <class name="Nick" table="Nicks" schema="Portal">
       <id name="Id" column="Id" type="Guid" >
-         <generator class="assigned"/>
+         <generator class="guid.comb"/>
       </id>
       <property name="Name" column="Name" type="String" not-null="true" unique="true" update="false"/>
       <many-to-one name="User" column="UserId" foreign-key="Nick_UserId_FK" class="User" not-null="true" />

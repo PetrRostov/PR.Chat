@@ -20,13 +20,14 @@ namespace PR.Chat.Infrastructure.Authentication
 
         public IAuthenticationProvider Create(AuthenticationMethod method)
         {
-            switch (method)
-            {
-                case AuthenticationMethod.ByPass :
-                    return _dependencyResolver.Resolve<IAuthenticationProvider>(ByPassProviderKey);
-                default:
-                    throw new ArgumentException();
-            }
+            return null;
+            //switch (method)
+            //{
+            //    case AuthenticationMethod.ByPass :
+            //        return _dependencyResolver.Resolve<IAuthenticationProvider>(ByPassProviderKey);
+            //    default:
+            //        throw new ArgumentException();
+            //}
         }
     }
 }

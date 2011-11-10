@@ -56,6 +56,7 @@
     <Compile Include="INHibernateDatabaseConfigurator.cs" />
     <Compile Include="MsSql2008NHibernateDatabaseConfigurator.cs" />
     <Compile Include="NHibernateDatabase.cs" />
+    <Compile Include="TypeConverters\EnumerationTypeConverter.cs" />
     <EmbeddedResource Include="Mapping\User.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>

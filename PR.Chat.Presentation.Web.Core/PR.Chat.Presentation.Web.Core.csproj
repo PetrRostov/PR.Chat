@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</ProjectGuid>
+    <ProjectGuid>{66E6DE3F-4C50-4978-842C-B5AF1DE7E239}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PR.Chat.Infrastructure</RootNamespace>
-    <AssemblyName>PR.Chat.Infrastructure</AssemblyName>
+    <RootNamespace>PR.Chat.Presentation.Web.Core</RootNamespace>
+    <AssemblyName>PR.Chat.Presentation.Web.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,15 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\References\Sign\pr.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,32 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\AuthenticationFields.cs" />
-    <Compile Include="Authentication\AuthenticationMethod.cs" />
-    <Compile Include="Authentication\AuthenticationRequest.cs" />
-    <Compile Include="Authentication\AuthenticationResponse.cs" />
-    <Compile Include="Authentication\ByPassAuthenticationProvider.cs" />
-    <Compile Include="Authentication\IAuthenticationProvider.cs" />
-    <Compile Include="Authentication\IAuthenticationProviderFactory.cs" />
-    <Compile Include="Check\Check.cs" />
-    <Compile Include="DependencyResolver\DependencyResolver.cs" />
-    <Compile Include="DependencyResolver\IDependencyResolver.cs" />
-    <Compile Include="DependencyResolver\IDependencyResolverFactory.cs" />
-    <Compile Include="Domain\IEntity.cs" />
-    <Compile Include="Domain\IValueObject.cs" />
-    <Compile Include="Enumeration\Enumeration.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Log\ILog.cs" />
-    <Compile Include="Log\Log.cs" />
+    <Compile Include="DBMembershipProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="..\References\Sign\pr.snk">
-      <Link>pr.snk</Link>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

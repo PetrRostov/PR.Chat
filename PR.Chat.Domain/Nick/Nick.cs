@@ -18,7 +18,7 @@ namespace PR.Chat.Domain
         {
             _user = user;
             _name = name;
-            _id = Guid.NewGuid();
+            //_id = Guid.NewGuid();
         }
 
         public virtual string Name      
