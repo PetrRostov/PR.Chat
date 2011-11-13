@@ -15,7 +15,7 @@ namespace PR.Chat.Domain.Tests
         [SetUp]
         public void Init()
         {
-            _user = new User("Name", "Password", false);
+            _user = new User(false);
         }
 
 

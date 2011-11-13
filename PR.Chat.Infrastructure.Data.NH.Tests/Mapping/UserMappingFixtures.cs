@@ -19,7 +19,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
         public void Save_and_load_should_work()
         {
             var password = Guid.NewGuid().ToString();
-            var user = new User(Guid.NewGuid().ToString(), password, false);
+            var user = new User(false);
 
             var nick1 = new Nick(user, Guid.NewGuid().ToString());
             var nick2 = new Nick(user, Guid.NewGuid().ToString()); 
@@ -37,20 +37,15 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
 
             using (var tran = Session.BeginTransaction())
             {
-                var loadedUser = Session.Query<User>().Where(u => u.Name == user.Name).First();
+                var loadedUser = Session.Query<User>().Where(u => u.Id == user.Id).First();
 
-                Assert.AreEqual(user.Name, loadedUser.Name);
-                Assert.AreEqual(user.IsRegistered, loadedUser.IsRegistered);
                 Assert.AreEqual(user.Id, loadedUser.Id);
+                Assert.AreEqual(user.IsRegistered, loadedUser.IsRegistered);
                 Assert.True(user.SameIdentityAs(loadedUser));
-                Assert.True(loadedUser.IsPasswordEqual(password));
-
+                
                 Assert.AreEqual(loadedUser.Nicks.Count(), 2);
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick1.Name));
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick2.Name));
-
-
-                loadedUser.SetPassword("opa");
 
                 tran.Commit();
             }
@@ -59,10 +54,9 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
 
             using (var tran = Session.BeginTransaction())
             {
-                var loadedUser = Session.Query<User>().Where(u => u.Name == user.Name).First();
+                var loadedUser = Session.Query<User>().Where(u => u.Id == user.Id).First();
 
-                Assert.True(loadedUser.IsPasswordEqual("opa"));
-
+                
                 Session.Delete(loadedUser);
 
                 tran.Commit();

@@ -14,40 +14,25 @@ namespace PR.Chat.Domain.Tests
         [Test]
         public void Constructor_should_work()
         {
-            const string name = "Name 123";
-            var user = new User(name, "Password", false);
-            Assert.AreEqual(user.Name, name);
-            //Assert.AreNotEqual(Guid.Empty, user.Id);
+            var user = new User(false);
             Assert.IsFalse(user.IsRegistered);
         }
         
-        [Test]
-        public void Constructor_should_throw_exception_if_argument_null_or_empty()
-        {
-            Assert.Throws<ArgumentNullException>(() => new User(null, "1", false));
-            Assert.Throws<ArgumentNullException>(() => new User("1", null, false));
-            Assert.Throws<ArgumentException>(() => new User("", "123", false));
-            Assert.Throws<ArgumentException>(() => new User("123", "", false));
-        }
-
-
-        [Test]
-        [TestCase("4")]
-        [TestCase("Pass")]
-        [TestCase("KLfd;kfdh")]
-        public void IsPasswordEqual_should_work(string password)
-        {
-            var user = new User("Name", password, false);
-            Assert.IsTrue(user.IsPasswordEqual(password));
-            Assert.IsFalse(user.IsPasswordEqual("123"));
-        }
 
         [Test]
         public void SameIdentityAs_should_work()
         {
-            var user1 = new User("userName", "opa", false);
-            var user2 = new User("UserName", "opa3", false);
-            var user3 = new User("NickName213", "opa3", false);
+            var id1 = Guid.NewGuid();
+            var id2 = Guid.NewGuid();
+
+            var user1 = new UserWithSetters();
+            user1.SetId(id1);
+
+            var user2 = new UserWithSetters();
+            user2.SetId(id1);
+
+            var user3 = new UserWithSetters();
+            user3.SetId(id2);
 
             Assert.IsTrue(user1.SameIdentityAs(user2));
             Assert.IsTrue(user2.SameIdentityAs(user1));
@@ -56,35 +41,43 @@ namespace PR.Chat.Domain.Tests
             Assert.IsFalse(user2.SameIdentityAs(user3));
         }
 
+
         [Test]
-        public void Equals_should_work()
+        public void NewUsers_should_be_equals()
         {
-            var user1 = new User("UseRName", "opa", false);
-            var user2 = new User("UserName", "op34a", false);
-            var user3 = new User("Nick4Name", "op34a", false);
+            var user1 = new User(false);
+            var user2 = new User(true);
+            var user3 = new User(false);
 
             Assert.IsTrue(user1.Equals(user2));
-            Assert.IsFalse(user1.Equals(user3));
-            Assert.IsFalse(user1.Equals(null));
-            Assert.IsFalse(user1.Equals(4));
+            Assert.IsTrue(user2.Equals(user3));
+            Assert.IsTrue(user3.Equals(user1)); 
         }
 
         [Test]
         public void GetHashCode_should_work()
         {
-            var user1 = new User("UserName", "opa", false);
-            var user2 = new User("UserNamE", "op34a", false);
-            var user3 = new User("Nick4Name", "op34a", false);
+            var id1 = Guid.NewGuid();
+            var id2 = Guid.NewGuid();
+
+            var user1 = new UserWithSetters();
+            user1.SetId(id1);
+
+            var user2 = new UserWithSetters();
+            user2.SetId(id1);
+
+            var user3 = new UserWithSetters();
+            user3.SetId(id2);
 
             Assert.AreEqual(user1.GetHashCode(), user2.GetHashCode());
-            Assert.AreNotEqual(user1.GetHashCode(), user3.GetHashCode());
+            Assert.AreNotEqual(user3.GetHashCode(), user2.GetHashCode());
         }
 
         [Test]
         public void CreateNick_should_work()
         {
             var nickName = "NickName";
-            var user = new User("UserName", "opa", false);
+            var user = new User(false);
             Nick nick = user.CreateNick("NickName");
 
             Assert.AreEqual(nick.Name, nickName);
@@ -93,26 +86,9 @@ namespace PR.Chat.Domain.Tests
         [Test]
         public void CreateNick_should_throws_exception_if_name_is_null_or_empty()
         {
-            var user = new User("UserName", "opa", false);
+            var user = new User(false);
             Assert.Throws<ArgumentNullException>(() => user.CreateNick(null));
             Assert.Throws<ArgumentException>(() => user.CreateNick(string.Empty));
-        }
-
-        [Test]
-        public void SetPassword_should_throws_exception_if_password_is_null_or_empty()
-        {
-            var user = new User("UserName", "opa", false);
-            Assert.Throws<ArgumentNullException>(() => user.SetPassword(null));
-            Assert.Throws<ArgumentException>(() => user.SetPassword(string.Empty));
-        }
-
-        [Test]
-        public void SetPassword_should_change_password()
-        {
-            var user = new User("UserName", "opa", false);
-            const string newPassword = "op1ddd";
-            user.SetPassword(newPassword);
-            Assert.IsTrue(user.IsPasswordEqual(newPassword));
         }
     }
 }

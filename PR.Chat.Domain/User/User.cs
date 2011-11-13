@@ -7,14 +7,10 @@ namespace PR.Chat.Domain
     public class User : IEntity<User, Guid>
     {
         private readonly Guid _id;
-        private readonly string _name;
-        private string _password;
         private readonly bool _isRegistered;
         private readonly ICollection<Nick> _nicks = new HashSet<Nick>();
 
         public virtual Guid Id { get { return _id; } }
-
-        public virtual string Name { get { return _name; }  }
 
         public virtual ICollection<Nick> Nicks { get { return _nicks; } }
 
@@ -26,33 +22,22 @@ namespace PR.Chat.Domain
             // For NHibernate
         }
 
-        internal User(
-            string name, 
-            string password, bool isRegistered)
+        internal User(bool isRegistered)
         {
-            Check.NotNullOrEmpty(name, "name");
-            Check.NotNullOrEmpty(password, "password");
-
-            _name = name;
-            _password = password;
             _isRegistered = isRegistered;
             //_id = Guid.NewGuid();
         }
 
-        public virtual bool IsPasswordEqual(string password)
-        {
-            return _password == password;
-        }
 
         public virtual bool SameIdentityAs(User other)
         {
-            return other != null && other.Name.Equals(Name, StringComparison.InvariantCultureIgnoreCase);
+            return other != null && other.Id == this.Id;
         }
 
 
         public override int GetHashCode()
         {
-            return Name.ToLowerInvariant().GetHashCode();
+            return Id.GetHashCode();
         }
 
         public override bool Equals(object obj)
@@ -70,10 +55,5 @@ namespace PR.Chat.Domain
             return new Nick(this, name);
         }
 
-        public virtual void SetPassword(string password)
-        {
-            Check.NotNullOrEmpty(password, "password");
-            _password = password;
-        }
     }
 }

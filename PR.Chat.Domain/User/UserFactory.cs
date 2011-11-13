@@ -7,15 +7,13 @@ namespace PR.Chat.Domain
         public User CreateUnregistered()
         {
             return new User(
-                Guid.NewGuid().ToString(), 
-                Guid.NewGuid().ToString(), 
                 false
             );
         }
 
-        public User CreateRegistered(string name, string password)
+        public User CreateRegistered()
         {
-            return new User(name, password, true);
+            return new User(true);
         }
     }
 }

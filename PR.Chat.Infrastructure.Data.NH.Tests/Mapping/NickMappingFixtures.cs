@@ -18,7 +18,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
         [Test]
         public void Save_and_load_should_work()
         {
-            var user = new User("Name", "Password", false);
+            var user = new User(false);
             var nick = new Nick(user, "Nick");
             using (var tran = Session.BeginTransaction())
             {

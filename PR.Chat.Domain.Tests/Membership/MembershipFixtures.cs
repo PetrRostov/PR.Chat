@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using PR.Chat.Test.Common;
 
-namespace PR.Chat.Domain.Tests.Membership
+namespace PR.Chat.Domain.Tests
 {
-    [TestFixture]
+    [TestFixture, Category(TestCategory.Domain)]
     public class MembershipFixtures
     {
 
@@ -11,60 +13,95 @@ namespace PR.Chat.Domain.Tests.Membership
         [SetUp]
         public void Init()
         {
-            _user = new User("Name", "Password", false);
+            _user = new User(false);
         }
 
         [Test]
         public void Constructor_Should_Work()
         {
-            const string nickName = @"Name";
-            var nick = new Nick(_user, nickName);
-            Assert.AreEqual(nick.Name, nickName);
+            const string login = @"Name";
+            const string pass = @"pass";
+            var registeredAt = DateTime.UtcNow;
+
+            var membership = new Membership(_user, login, pass, registeredAt);
+            Assert.AreEqual(membership.User, _user);
+            Assert.IsTrue(membership.User.SameIdentityAs(_user));
+
+            Assert.AreEqual(membership.Login, login);
+            Assert.IsTrue(membership.IsPasswordEqual(pass));
+
+            Assert.AreEqual(membership.RegisteredAt, registeredAt);
+        }
+
+        [Test]
+        public void Constructor_should_throw_exception_if_argument_null_or_empty()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Membership(null, "1", "1", DateTime.UtcNow));
+            Assert.Throws<ArgumentNullException>(() => new Membership(_user, null, "1", DateTime.UtcNow));
+            Assert.Throws<ArgumentNullException>(() => new Membership(_user, "1", null, DateTime.UtcNow));
+
+            Assert.Throws<ArgumentException>(() => new Membership(_user, string.Empty, "1", DateTime.UtcNow));
+            Assert.Throws<ArgumentException>(() => new Membership(_user, "1", string.Empty, DateTime.UtcNow));
+        }
+
+
+        [Test]
+        [TestCase("4")]
+        [TestCase("Pass")]
+        [TestCase("KLfd;kfdh")]
+        public void IsPasswordEqual_should_work(string password)
+        {
+            var user = new Membership(_user, "login", password, DateTime.UtcNow);
+            Assert.IsTrue(user.IsPasswordEqual(password));
+            Assert.IsFalse(user.IsPasswordEqual("123"));
         }
 
         [Test]
         public void SameIdentityAs_should_return_false_for_not_equals_Names()
         {
-            var nick1 = new Nick(_user, "name1");
-            var nick2 = new Nick(_user, "name");
+            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership2 = new Membership(_user, "name2", "pass", DateTime.UtcNow);
 
-            Assert.IsFalse(nick1.SameIdentityAs(nick2));
-            Assert.IsFalse(nick1.SameIdentityAs(null));
+            Assert.IsFalse(membership1.SameIdentityAs(membership2));
+            Assert.IsFalse(membership1.SameIdentityAs(null));
         }
 
         [Test]
         public void GetHashcode_should_return_equals_values_for_equals_Names()
         {
-            var nick1 = new Nick(_user, "Name");
-            var nick2 = new Nick(_user, "NamE");
+            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership2 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
 
-            Assert.AreEqual(nick1.GetHashCode(), nick2.GetHashCode());
+            Assert.AreEqual(membership1.GetHashCode(), membership2.GetHashCode());
         }
 
         [Test]
         public void GetHashcode_should_return_not_equals_values_for_not_equals_Names()
         {
-            var nick1 = new Nick(_user, "Opa");
-            var nick2 = new Nick(_user, "Opa1");
-            Assert.AreNotEqual(nick2.GetHashCode(), nick1.GetHashCode());
+            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership2 = new Membership(_user, "name2", "pass", DateTime.UtcNow);
+
+            Assert.AreNotEqual(membership1.GetHashCode(), membership2.GetHashCode());
         }
 
         [Test]
         public void Equals_should_return_true_for_equals_Names()
         {
-            var nick1 = new Nick(_user, "Opa");
-            var nick2 = new Nick(_user, "OpA");
-            Assert.IsTrue(nick1.Equals(nick2));
+            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership2 = new Membership(_user, "NaMe1", "pass", DateTime.UtcNow);
+
+            Assert.IsTrue(membership1.Equals(membership2));
         }
 
         [Test]
         public void Equals_should_return_false_for_not_equals_Names()
         {
-            var nick1 = new Nick(_user, "Opa");
-            var nick2 = new Nick(_user, "OpA1");
-            Assert.IsFalse(nick1.Equals(nick2));
-            Assert.IsFalse(nick1.Equals(1));
-            Assert.IsFalse(nick1.Equals(null));
+            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership2 = new Membership(_user, "name2", "pass", DateTime.UtcNow);
+
+            Assert.IsFalse(membership1.Equals(membership2));
+            Assert.IsFalse(membership1.Equals(1));
+            Assert.IsFalse(membership1.Equals(null));
         }
     }
 }

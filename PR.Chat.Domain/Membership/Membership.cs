@@ -1,8 +1,7 @@
 ﻿using System;
 using PR.Chat.Infrastructure;
-using PR.Chat.Infrastructure.Authentication;
 
-namespace PR.Chat.Domain.Membership
+namespace PR.Chat.Domain
 {
     public class Membership : IEntity<Membership, Guid>
     {
@@ -12,15 +11,13 @@ namespace PR.Chat.Domain.Membership
 
         private readonly DateTime _registeredAt;
 
-        private readonly DateTime _lastLogin;
-
         private readonly User _user;
 
         private string _password;
 
         public virtual DateTime RegisteredAt { get { return _registeredAt; } }
 
-        public virtual DateTime LastLogin { get { return _lastLogin; } }
+        public virtual DateTime? LastLogin { get; set; }
 
         public virtual string Login { get { return _login; } }
 
@@ -30,16 +27,31 @@ namespace PR.Chat.Domain.Membership
 
         internal Membership(User user, string login, string password, DateTime registeredAt)
         {
+            Check.NotNull(user, "user");
+            Check.NotNullOrEmpty(login, "login");
+            Check.NotNullOrEmpty(password, "password");
+
             _user           = user;
             _login          = login;
             _registeredAt   = registeredAt;
             _password       = password;
         }
 
-        //protected Membership()
-        //{
-        //    // for NHibernate
-        //}
+        public virtual bool IsPasswordEqual(string password)
+        {
+            return _password == password;
+        }
+
+        public virtual void SetPassword(string password)
+        {
+            Check.NotNullOrEmpty(password, "password");
+            _password = password;
+        }
+
+        protected Membership()
+        {
+            // for NHibernate
+        }
 
         
 
