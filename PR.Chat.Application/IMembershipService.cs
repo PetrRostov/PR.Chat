@@ -8,7 +8,7 @@ namespace PR.Chat.Application
 
         EnterResult EnterAsRegistered(string email, string password);
 
-        MembershipDto Register(
+        RegisterResult Register(
             string email, 
             string password, 
             string repeatPassword,
