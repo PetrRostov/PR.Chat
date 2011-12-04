@@ -55,7 +55,7 @@ namespace PR.Chat.Domain
 
         
 
-        public bool SameIdentityAs(Membership other)
+        public virtual bool SameIdentityAs(Membership other)
         {
             return other != null && other.Login.Equals(Login, StringComparison.InvariantCultureIgnoreCase);
         }

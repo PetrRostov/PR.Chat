@@ -56,7 +56,9 @@
     <Compile Include="Common\ISpecification.cs" />
     <Compile Include="Common\NotSpecification.cs" />
     <Compile Include="Common\OrSpecification.cs" />
+    <Compile Include="Membership\IMembershipFactory.cs" />
     <Compile Include="Membership\Membership.cs" />
+    <Compile Include="Membership\MembershipFactory.cs" />
     <Compile Include="Nick\Nick.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\IUserFactory.cs" />

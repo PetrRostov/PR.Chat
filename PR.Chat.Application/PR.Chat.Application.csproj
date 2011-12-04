@@ -46,12 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResult\EnterResult.cs" />
+    <Compile Include="ActionResult\RegisterResult.cs" />
+    <Compile Include="DTO\NickDto.cs" />
+    <Compile Include="DTO\UserDto.cs" />
+    <Compile Include="IMembershipService.cs" />
+    <Compile Include="IMessageService.cs" />
+    <Compile Include="DTO\MembershipDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\References\Sign\pr.snk">
       <Link>pr.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
+      <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
+      <Name>PR.Chat.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

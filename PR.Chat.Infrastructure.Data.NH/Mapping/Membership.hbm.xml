@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<hibernate-mapping 
+   xmlns="urn:nhibernate-mapping-2.2" 
+   assembly="PR.Chat.Domain"  
+   namespace="PR.Chat.Domain" 
+   default-access="nosetter.camelcase-underscore"
+>
+
+   <class name="Membership" table="Membership" schema="Portal">
+      <id name="Id" column="Id" type="Guid" >
+         <generator class="guid.comb"/>
+      </id>
+      <property name="Login" column="Login" type="String" not-null="true" length="40" unique="true" unique-key="login_unique_key"  update="false" />
+      <property name="_password" column="Passsword" type="String" length="255" access="field"  />
+      <property name="RegisteredAt" column="RegisteredAt" type="DateTime" not-null="true" update="false" />
+      <property name="LastLogin" column="LastLogin" type="DateTime" not-null="false" access="property"  />
+
+      <many-to-one name="User" column="UserId" foreign-key="Membeship_UserId_FK" class="User" not-null="true" update="false" />
+      
+   </class>
+   
+</hibernate-mapping>

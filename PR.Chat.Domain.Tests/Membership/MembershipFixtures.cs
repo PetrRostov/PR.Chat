@@ -103,5 +103,6 @@ namespace PR.Chat.Domain.Tests
             Assert.IsFalse(membership1.Equals(1));
             Assert.IsFalse(membership1.Equals(null));
         }
+
     }
 }
