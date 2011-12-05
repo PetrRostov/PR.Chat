@@ -6,28 +6,28 @@ namespace PR.Chat.Infrastructure.Data
     public abstract class BaseRepository<T, TKey> : IRepository<T, TKey>
         where T : class, IEntity<T, TKey>
     {
-        private readonly IDatabase _database;
+        protected readonly IDatabase Database;
 
         protected BaseRepository(IDatabaseFactory databaseFactory)
         {
             Check.NotNull(databaseFactory, "databaseFactory");
-            _database = databaseFactory.Create();
+            Database = databaseFactory.Create();
         }
 
         protected BaseRepository(IDatabase database)
         {
             Check.NotNull(database, "database");
-            _database = database;
+            Database = database;
         }
 
         public virtual void Add(T entity)
         {
-            _database.AddOnSubmit(entity);
+            Database.AddOnSubmit(entity);
         }
 
         public virtual T GetById(TKey key)
         {
-            var element = _database.GetSource<T, TKey>()
+            var element = GetSource()
                 .FirstOrDefault(entity => entity.Id.Equals(key));
 
             if (element == null)
@@ -38,17 +38,22 @@ namespace PR.Chat.Infrastructure.Data
 
         public virtual void Remove(T entity)
         {
-            _database.DeleteOnSubmit(entity);
+            Database.DeleteOnSubmit(entity);
         }
 
         public virtual void Update(T entity)
         {
-            _database.UpdateOnSubmit(entity);
+            Database.UpdateOnSubmit(entity);
         }
 
         public virtual IEnumerable<T> GetAll()
         {
-            return _database.GetSource<T, TKey>().AsEnumerable();
+            return GetSource().AsEnumerable();
+        }
+
+        protected virtual IQueryable<T> GetSource()
+        {
+            return Database.GetSource<T, TKey>();
         }
     }
 }

@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Application", "PR.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Presentation.Web.Core", "PR.Chat.Presentation.Web.Core\PR.Chat.Presentation.Web.Core.csproj", "{66E6DE3F-4C50-4978-842C-B5AF1DE7E239}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Infrastructure.LinqSpecs", "PR.Chat.Infrastructure.LinqSpecs\PR.Chat.Infrastructure.LinqSpecs.csproj", "{D60875A3-0DE2-409D-86A0-F540224D054C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{66E6DE3F-4C50-4978-842C-B5AF1DE7E239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E6DE3F-4C50-4978-842C-B5AF1DE7E239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E6DE3F-4C50-4978-842C-B5AF1DE7E239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60875A3-0DE2-409D-86A0-F540224D054C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60875A3-0DE2-409D-86A0-F540224D054C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60875A3-0DE2-409D-86A0-F540224D054C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60875A3-0DE2-409D-86A0-F540224D054C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

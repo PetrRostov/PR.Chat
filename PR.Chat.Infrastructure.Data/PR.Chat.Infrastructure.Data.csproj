@@ -55,9 +55,9 @@
     <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Exceptions\TransactionAlreadyStartedException.cs" />
     <Compile Include="Exceptions\TransactionInactiveException.cs" />
+    <Compile Include="Repository\MembershipRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +70,10 @@
     <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
       <Project>{18615872-D14D-450B-9980-7DDF41885C61}</Project>
       <Name>PR.Chat.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure.LinqSpecs\PR.Chat.Infrastructure.LinqSpecs.csproj">
+      <Project>{D60875A3-0DE2-409D-86A0-F540224D054C}</Project>
+      <Name>PR.Chat.Infrastructure.LinqSpecs</Name>
     </ProjectReference>
     <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
       <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
