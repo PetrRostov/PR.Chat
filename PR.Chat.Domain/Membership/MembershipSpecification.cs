@@ -8,8 +8,9 @@ namespace PR.Chat.Domain
          public static Specification<Membership> LoginEquals(string login)
          {
              return new AdHocSpecification<Membership>(
-                m => login.Equals(m.Login, StringComparison.InvariantCultureIgnoreCase)
+                m =>  login.Equals(m.Login, StringComparison.InvariantCultureIgnoreCase)
              );
          }
     }
+
 }

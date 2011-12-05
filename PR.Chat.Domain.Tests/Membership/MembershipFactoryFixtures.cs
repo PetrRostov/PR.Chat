@@ -9,7 +9,7 @@ namespace PR.Chat.Domain.Tests
     {
         private IMembershipFactory _membershipFactory;
 
-        [SetUp]
+        [TestFixtureSetUp]
         public void Init()
         {
             _membershipFactory = new MembershipFactory();

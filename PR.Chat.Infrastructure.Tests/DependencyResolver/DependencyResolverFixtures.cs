@@ -56,6 +56,7 @@ namespace PR.Chat.Infrastructure.Tests
         {
             var result = DependencyResolver.Resolve<IList<string>>();
             Assert.AreSame(result, _resolveObject);
+            _dependencyResolver.Verify(dr => dr.Resolve<IList<string>>());
         }
 
         [Test]
@@ -63,6 +64,7 @@ namespace PR.Chat.Infrastructure.Tests
         {
             var result = DependencyResolver.Resolve<IList<string>>("hdf3");
             Assert.AreSame(result, _resolveNamedObject);
+            _dependencyResolver.Verify(dr => dr.Resolve<IList<string>>(It.IsAny<string>()));
         }
 
         [Test]
@@ -70,18 +72,14 @@ namespace PR.Chat.Infrastructure.Tests
         {
             var result = DependencyResolver.ResolveAll<IList<string>>();
             Assert.AreSame(result, _resolveAllObject);
+            _dependencyResolver.Verify(dr => dr.ResolveAll<IList<string>>());
         }
 
         [Test]
         public void Register_should_work()
         {
             DependencyResolver.Register((object)"123");
-        }
-
-        [TestFixtureTearDown]
-        public void Should_call_all_inner_methods()
-        {
-            _dependencyResolver.VerifyAll();            
+            _dependencyResolver.Verify(dr => dr.Register(It.IsAny<object>()));
         }
     }
 }

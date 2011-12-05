@@ -25,10 +25,10 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
     //
 
     public class PropValue
-	{
-		public PropertyInfo Property { get; set; }
-		public object Value { get; set; }
-	}
+    {
+        public PropertyInfo Property { get; set; }
+        public object Value { get; set; }
+    }
     public class ExpressionSerializer
     {
         private static readonly Type[] attributeTypes = new[] { typeof(string), typeof(int), typeof(bool), typeof(ExpressionType) };
@@ -48,23 +48,23 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             Converters = new List<CustomExpressionXmlConverter>();
         }
 
-        
-        
+
+
         /*
          * SERIALIZATION 
          */
 
         public XElement Serialize(Expression e)
         {
-					try
-					{
-						return GenerateXmlFromExpressionCore(e);
-					}
-					catch (Exception ex)
-					{
+            try
+            {
+                return GenerateXmlFromExpressionCore(e);
+            }
+            catch (Exception ex)
+            {
 
-					}
-					return null;
+            }
+            return null;
         }
 
         private XElement GenerateXmlFromExpressionCore(Expression e)
@@ -74,27 +74,27 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             XElement replace = ApplyCustomConverters(e);
             if (replace != null)
                 return replace;
-						PropertyInfo[] properties = e.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-						List<PropValue> propList = new List<PropValue>();
-						foreach (var prop in properties)
-						{
-							try
-							{
-								object val = prop.GetValue(e, null);
-								propList.Add(new PropValue { Property = prop, Value = val });
-								//return new XElement(GetNameOfExpression(e), GenerateXmlFromProperty(prop.PropertyType, prop.Name, prop.GetValue(e, null)));
-							}
-							catch (MethodAccessException ex)
-							{
-								propList.Add(new PropValue { Property = prop, Value = e.Type });
-								//return new XElement(GetNameOfExpression(e), GenerateXmlFromProperty(prop.PropertyType, prop.Name, null));
-							}
-						}
+            PropertyInfo[] properties = e.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            List<PropValue> propList = new List<PropValue>();
+            foreach (var prop in properties)
+            {
+                try
+                {
+                    object val = prop.GetValue(e, null);
+                    propList.Add(new PropValue { Property = prop, Value = val });
+                    //return new XElement(GetNameOfExpression(e), GenerateXmlFromProperty(prop.PropertyType, prop.Name, prop.GetValue(e, null)));
+                }
+                catch (MethodAccessException ex)
+                {
+                    propList.Add(new PropValue { Property = prop, Value = e.Type });
+                    //return new XElement(GetNameOfExpression(e), GenerateXmlFromProperty(prop.PropertyType, prop.Name, null));
+                }
+            }
 
-						return new XElement(
-												GetNameOfExpression(e),
-												from prop in propList
-                        select GenerateXmlFromProperty(prop.Property.PropertyType, prop.Property.Name, prop.Value));
+            return new XElement(
+                                    GetNameOfExpression(e),
+                                    from prop in propList
+                                    select GenerateXmlFromProperty(prop.Property.PropertyType, prop.Property.Name, prop.Value));
         }
 
         private XElement ApplyCustomConverters(Expression e)
@@ -108,12 +108,12 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             return null;
         }
 
-				private string GetNameOfExpression(Expression e)
-				{
-					if (e is LambdaExpression)
-						return "LambdaExpression";
-					return XmlConvert.EncodeName(e.GetType().Name);
-				}
+        private string GetNameOfExpression(Expression e)
+        {
+            if (e is LambdaExpression)
+                return "LambdaExpression";
+            return XmlConvert.EncodeName(e.GetType().Name);
+        }
 
 
         private object GenerateXmlFromProperty(Type propType, string propName, object value)
@@ -154,36 +154,6 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
                 result = value.ToString();
             return new XElement(propName,
                 result);
-        }
-
-
-        private object GenerateXmlFromObject2(string propName, object value)
-        {
-            object result = null;
-            if (value is Type)
-                result = GenerateXmlFromTypeCore((Type)value);
-            if (propName == "Value" && value != null)
-            {
-                using (var stream = new MemoryStream())
-                {
-                    new BinaryFormatter().Serialize(stream, value);
-                    stream.Seek(0, SeekOrigin.Begin);
-                    var buffer = new byte[stream.Length];
-                    stream.Read(buffer, 0, buffer.Length);
-                    result = Convert.ToBase64String(buffer);
-                }
-            }
-            if (result == null)
-                if (value == null)
-                {
-                    result = "null";
-                }
-                else
-                {
-                    result = value.ToString();
-                }
-            return new XElement(propName,
-                                result);
         }
 
         private bool IsIEnumerableOf<T>(Type propType)
@@ -312,11 +282,11 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
                                 GenerateXmlFromTypeCore(parameter.ParameterType))
                     ));
 
-            else        
+            else
             {
                 //vsadov: GetGenericArguments returns args for nongeneric types 
                 //like arrays no need to save them.
-                if (type.IsGenericType)   
+                if (type.IsGenericType)
                 {
                     return new XElement("Type",
                                             new XAttribute("Name", type.GetGenericTypeDefinition().FullName),
@@ -325,7 +295,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
                 }
                 else
                 {
-                    return new XElement("Type",new XAttribute("Name", type.FullName));
+                    return new XElement("Type", new XAttribute("Name", type.FullName));
                 }
 
             }
@@ -333,7 +303,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
 
         private object GenerateXmlFromPrimitive(string propName, object value)
         {
-            return new XAttribute(propName, value ?? string.Empty);
+            return new XAttribute(propName, (value == null) ? string.Empty : value);
         }
 
         private object GenerateXmlFromMethodInfo(string propName, MethodInfo methodInfo)
@@ -420,57 +390,56 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
 
         private Expression ParseExpressionFromXmlNonNull(XElement xml)
         {
-					Expression expression = ApplyCustomDeserializers(xml);
+            Expression expression = ApplyCustomDeserializers(xml);
 
-					if (expression != null)
-						return expression;
-					switch (xml.Name.LocalName)
-					{
-						case "BinaryExpression":
-						case "SimpleBinaryExpression":
-						case "LogicalBinaryExpression":
-						case "MethodBinaryExpression":
-							return ParseBinaryExpresssionFromXml(xml);
-						case "ConstantExpression":
-						case "TypedConstantExpression":
-							return ParseConstatExpressionFromXml(xml);
-						case "ParameterExpression":
-						case "PrimitiveParameterExpression_x0060_1":
-						case "PrimitiveParameterExpressionx00601":
-						case "TypedParameterExpression":
-							return ParseParameterExpressionFromXml(xml);
-						case "LambdaExpression":
-							return ParseLambdaExpressionFromXml(xml);
-						case "MethodCallExpression":
-						case "MethodCallExpressionN":
-						case "InstanceMethodCallExpressionN":
-							return ParseMethodCallExpressionFromXml(xml);
-						case "UnaryExpression":
-							return ParseUnaryExpressionFromXml(xml);
-						case "MemberExpression":
-						case "PropertyExpression":
-						case "FieldExpression":
-							return ParseMemberExpressionFromXml(xml);
-						case "NewExpression":
-							return ParseNewExpressionFromXml(xml);
-						case "ListInitExpression":
-							return ParseListInitExpressionFromXml(xml);
-						case "MemberInitExpression":
-							return ParseMemberInitExpressionFromXml(xml);
-						case "ConditionalExpression":
-						case "FullConditionalExpression":
-							return ParseConditionalExpressionFromXml(xml);
-						case "NewArrayExpression":
-						case "NewArrayInitExpression":
-						case "NewArrayBoundsExpression":
-							return ParseNewArrayExpressionFromXml(xml);
-						case "TypeBinaryExpression":
-							return ParseTypeBinaryExpressionFromXml(xml);
-						case "InvocationExpression":
-							return ParseInvocationExpressionFromXml(xml);
-						default:
-							throw new NotSupportedException(xml.Name.LocalName);
-					}
+            if (expression != null)
+                return expression;
+            switch (xml.Name.LocalName)
+            {
+                case "BinaryExpression":
+                case "SimpleBinaryExpression":
+                case "LogicalBinaryExpression":
+                case "MethodBinaryExpression":
+                    return ParseBinaryExpresssionFromXml(xml);
+                case "ConstantExpression":
+                case "TypedConstantExpression":
+                    return ParseConstatExpressionFromXml(xml);
+                case "ParameterExpression":
+                case "PrimitiveParameterExpressionx00601":
+                case "TypedParameterExpression":
+                    return ParseParameterExpressionFromXml(xml);
+                case "LambdaExpression":
+                    return ParseLambdaExpressionFromXml(xml);
+                case "MethodCallExpression":
+                case "MethodCallExpressionN":
+                case "InstanceMethodCallExpressionN":
+                    return ParseMethodCallExpressionFromXml(xml);
+                case "UnaryExpression":
+                    return ParseUnaryExpressionFromXml(xml);
+                case "MemberExpression":
+                case "PropertyExpression":
+                case "FieldExpression":
+                    return ParseMemberExpressionFromXml(xml);
+                case "NewExpression":
+                    return ParseNewExpressionFromXml(xml);
+                case "ListInitExpression":
+                    return ParseListInitExpressionFromXml(xml);
+                case "MemberInitExpression":
+                    return ParseMemberInitExpressionFromXml(xml);
+                case "ConditionalExpression":
+                case "FullConditionalExpression":
+                    return ParseConditionalExpressionFromXml(xml);
+                case "NewArrayExpression":
+                case "NewArrayInitExpression":
+                case "NewArrayBoundsExpression":
+                    return ParseNewArrayExpressionFromXml(xml);
+                case "TypeBinaryExpression":
+                    return ParseTypeBinaryExpressionFromXml(xml);
+                case "InvocationExpression":
+                    return ParseInvocationExpressionFromXml(xml);
+                default:
+                    throw new NotSupportedException(xml.Name.LocalName);
+            }
 
         }
 
@@ -479,7 +448,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             foreach (var converter in Converters)
             {
                 Expression result = converter.Deserialize(xml);
-                if (result != null) 
+                if (result != null)
                     return result;
             }
             return null;
@@ -595,8 +564,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             Type declaringType = ParseTypeFromXml(xml.Element("DeclaringType"));
             var ps = from paramXml in xml.Element("IndexParameters").Elements()
                      select ParseTypeFromXml(paramXml);
-            //return declaringType.GetProperty(propertyName, typeof(Type), ps.ToArray());
-            return declaringType.GetProperty(propertyName, ps.ToArray());
+            return declaringType.GetProperty(propertyName, typeof(Type), ps.ToArray());
         }
 
         private Expression ParseUnaryExpressionFromXml(XElement xml)
@@ -629,7 +597,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             //var lambdaExpressionReturnType = type.GetMethod("Invoke").ReturnType;
             //if (lambdaExpressionReturnType.IsArray)
             //{
-                
+
             //    type = typeof(IEnumerable<>).MakeGenericType(type.GetElementType());
             //}
             return Expression.Lambda(type, body, parameters);
@@ -806,7 +774,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
                 throw new Exception("We should never be encoding Types in attributes now.");
             if (typeof(Enum).IsAssignableFrom(typeof(T)))
                 return Enum.Parse(typeof(T), objectStringValue, true);
-            return Convert.ChangeType(objectStringValue, typeof(T),CultureInfo.CurrentCulture);
+            return Convert.ChangeType(objectStringValue, typeof(T), CultureInfo.CurrentCulture);
         }
 
         private object ParseConstantFromAttribute(XElement xml, string attrName, Type type)
@@ -816,7 +784,7 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
                 throw new Exception("We should never be encoding Types in attributes now.");
             if (typeof(Enum).IsAssignableFrom(type))
                 return Enum.Parse(type, objectStringValue, true);
-						return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
+            return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
         }
 
         private object ParseConstantFromElement(XElement xml, string elemName, Type type)
@@ -825,8 +793,8 @@ namespace PR.Chat.Infrastructure.LinqSpecs.ExpressionSerialization
             if (typeof(Type).IsAssignableFrom(type))
                 return ParseTypeFromXml(xml.Element("Value"));
             if (typeof(Enum).IsAssignableFrom(type))
-                return Enum.Parse(type, objectStringValue,true);
-						return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
+                return Enum.Parse(type, objectStringValue, true);
+            return Convert.ChangeType(objectStringValue, type, CultureInfo.CurrentCulture);
         }
     }
 }

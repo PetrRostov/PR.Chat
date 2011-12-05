@@ -14,7 +14,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         private Mock<IDatabase> _database;
         private MembershipRepository _membershipRepository;
 
-        [SetUp]
+        [TestFixtureSetUp]
         public void Init()
         {
             var user = new User(false);

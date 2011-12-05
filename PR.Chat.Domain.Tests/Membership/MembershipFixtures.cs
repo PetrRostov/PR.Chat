@@ -10,7 +10,7 @@ namespace PR.Chat.Domain.Tests
 
         private User _user;
 
-        [SetUp]
+        [TestFixtureSetUp]
         public void Init()
         {
             _user = new User(false);
