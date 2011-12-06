@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{46A17C22-604E-4439-B5B7-A5D95DD8B338}</ProjectGuid>
+    <ProjectGuid>{3006B379-780D-4D36-8C05-B372D1BE7581}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PR.Chat.Infrastructure.Data</RootNamespace>
-    <AssemblyName>PR.Chat.Infrastructure.Data</AssemblyName>
+    <RootNamespace>PR.Chat.Application.Tests</RootNamespace>
+    <AssemblyName>PR.Chat.Application.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,15 +30,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\References\Sign\pr.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,39 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionStringProvider.cs" />
-    <Compile Include="Exceptions\ConnectionStringNotFoundException.cs" />
-    <Compile Include="Exceptions\EntityNotFoundException.cs" />
-    <Compile Include="IConnectionStringProvider.cs" />
-    <Compile Include="IDatabase.cs" />
-    <Compile Include="IDatabaseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Exceptions\TransactionAlreadyStartedException.cs" />
-    <Compile Include="Exceptions\TransactionInactiveException.cs" />
-    <Compile Include="Repository\MembershipRepository.cs" />
-    <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\References\Sign\pr.snk">
-      <Link>pr.snk</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
-      <Project>{18615872-D14D-450B-9980-7DDF41885C61}</Project>
-      <Name>PR.Chat.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PR.Chat.Infrastructure.LinqSpecs\PR.Chat.Infrastructure.LinqSpecs.csproj">
-      <Project>{D60875A3-0DE2-409D-86A0-F540224D054C}</Project>
-      <Name>PR.Chat.Infrastructure.LinqSpecs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
-      <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
-      <Name>PR.Chat.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

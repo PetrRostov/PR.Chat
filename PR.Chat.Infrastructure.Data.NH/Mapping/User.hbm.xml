@@ -10,7 +10,7 @@
       <id name="Id" column="Id" type="Guid" >
          <generator class="guid.comb"/>
       </id>
-      <property name="IsRegistered" column="IsRegistered" type="Boolean" not-null="true" update="false"/>
+      <property name="IsRegistered" column="IsRegistered" type="Boolean" not-null="true" />
       <set name="Nicks" fetch="join" inverse ="true"  cascade="all" lazy="false">
          <key column="UserId" not-null="true" />
          <one-to-many class="Nick" not-found="ignore" />
