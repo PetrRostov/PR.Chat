@@ -58,10 +58,11 @@ namespace PR.Chat.Domain.Tests
         }
 
         [Test]
-        public void RegisterWithUser_set_this_user_as_membership_owner()
+        public void RegisterWithUser_set_this_user_as_membership_owner_and_set_IsRegistered_true()
         {
             var membership = _membershipService.Register(_user, "Login", "Password");
             Assert.AreSame(membership.User, _user);
+            Assert.IsTrue(membership.User.IsRegistered);
         }
 
         [Test]

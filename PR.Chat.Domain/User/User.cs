@@ -7,7 +7,7 @@ namespace PR.Chat.Domain
     public class User : IEntity<User, Guid>
     {
         private readonly Guid _id;
-        private readonly bool _isRegistered;
+        private bool _isRegistered;
         private readonly ICollection<Nick> _nicks = new HashSet<Nick>();
 
         public virtual Guid Id { get { return _id; } }
@@ -55,5 +55,9 @@ namespace PR.Chat.Domain
             return new Nick(this, name);
         }
 
+        public virtual void SetAsRegistered()
+        {
+            _isRegistered = true;
+        }
     }
 }

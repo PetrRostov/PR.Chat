@@ -47,6 +47,9 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick1.Name));
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick2.Name));
 
+
+                loadedUser.SetAsRegistered();
+
                 tran.Commit();
             }
 
@@ -55,7 +58,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
             using (var tran = Session.BeginTransaction())
             {
                 var loadedUser = Session.Query<User>().Where(u => u.Id == user.Id).First();
-
+                Assert.IsTrue(loadedUser.IsRegistered);
                 
                 Session.Delete(loadedUser);
 

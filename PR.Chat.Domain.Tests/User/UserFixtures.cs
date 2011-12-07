@@ -84,6 +84,15 @@ namespace PR.Chat.Domain.Tests
         }
 
         [Test]
+        public void SetAsRegistered_should_work()
+        {
+            var user = new User(false);
+            user.SetAsRegistered();
+
+            Assert.IsTrue(user.IsRegistered);
+        }
+
+        [Test]
         public void CreateNick_should_throws_exception_if_name_is_null_or_empty()
         {
             var user = new User(false);

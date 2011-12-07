@@ -31,6 +31,7 @@ namespace PR.Chat.Domain
         public Membership Register(User user, string login, string password)
         {
             
+            user.SetAsRegistered();
             var membership = _membershipFactory.Create(user, login, password, DateTime.UtcNow);
             _membershipRepository.Add(membership);
 
