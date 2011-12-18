@@ -13,11 +13,16 @@ namespace PR.Chat.Infrastructure.Data.Tests
         private IQueryable<Membership> _membershipSource;
         private Mock<IDatabase> _database;
         private MembershipRepository _membershipRepository;
+        private Mock<User> _user;
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void Init()
         {
-            var user = new User(false);
+            var userId = Guid.NewGuid();
+            _user = new Mock<User>();
+            _user.Setup(u => u.Id).Returns(userId);
+
+            var user = _user.Object;// new User(false);
             _membershipSource = new[] {
                 new Membership(user, "login1", "password2", DateTime.UtcNow),
                 new Membership(user, "loGin2", "password2", DateTime.UtcNow),
@@ -44,5 +49,38 @@ namespace PR.Chat.Infrastructure.Data.Tests
             Assert.IsTrue(membership.Login.Equals("login2", StringComparison.InvariantCultureIgnoreCase));
         }
 
+        [Test]
+        public void GetByLogin_should_throw_exception_if_entity_not_found()
+        {
+            Assert.Throws<EntityNotFoundException<Membership>>(() => _membershipRepository.GetByLogin("loGin12"));
+        }
+
+
+
+        [Test]
+        public void GetByUser_should_return_empty_collection_if_user_not_match()
+        {
+            var userId = Guid.NewGuid();
+            var user = new Mock<User>();
+            user.Setup(u => u.Id).Returns(userId);
+
+            CollectionAssert.IsEmpty(_membershipRepository.GetByUser(user.Object));
+
+        }
+
+        [Test]
+        public void GetByUser_should_return_right_result()
+        {
+            var memberships = _membershipRepository.GetByUser(_user.Object);
+
+            Assert.AreEqual(memberships.Count(), 3);
+        }
+
+        [Test]
+        public void ExistsWithLogin_should_return_right_result()
+        {
+            Assert.IsTrue(_membershipRepository.ExistsWithLogin("lOgIn1"));
+            Assert.IsFalse(_membershipRepository.ExistsWithLogin("lOgIn145")); 
+        }
     }
 }

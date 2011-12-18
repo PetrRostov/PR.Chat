@@ -27,7 +27,7 @@ namespace PR.Chat.Infrastructure.Tests
             _log.Setup(l => l.Error(It.IsAny<string>())).Verifiable();
             _log.Setup(l => l.Error(It.IsAny<Exception>())).Verifiable();
 
-            DependencyResolver.InitializeWith(_dependencyResolver.Object);
+            IoC.InitializeWith(_dependencyResolver.Object);
         }
 
         [Test]

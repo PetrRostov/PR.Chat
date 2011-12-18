@@ -17,9 +17,31 @@ namespace PR.Chat.Infrastructure.Data
 
         public Membership GetByLogin(string login)
         {
-            return GetSource()
+            var membership = GetSource()
                 .Where(MembershipSpecification.LoginEquals(login).IsSatisfiedBy())
-                .First();
+                .FirstOrDefault();
+
+            if (membership == null)
+                ExceptionHelper.EntityNotFound<Membership>("login", login);
+
+            return membership;
+        }
+
+        public IEnumerable<Membership> GetByUser(User user)
+        {
+            return GetSource()
+                .Where(MembershipSpecification.UserOwnerEquals(user).IsSatisfiedBy())
+                .ToList()
+                .AsReadOnly();
+        }
+
+        public bool ExistsWithLogin(string login)
+        {
+            var membership = GetSource()
+                .Where(MembershipSpecification.LoginEquals(login).IsSatisfiedBy())
+                .FirstOrDefault();
+
+            return membership != null;
         }
     }
 }

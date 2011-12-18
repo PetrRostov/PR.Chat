@@ -7,7 +7,7 @@ namespace PR.Chat.Infrastructure
     {
         private static ILog GetLog()
         {
-            return DependencyResolver.Resolve<ILog>();
+            return IoC.Resolve<ILog>();
         }
 
         [DebuggerStepThrough]

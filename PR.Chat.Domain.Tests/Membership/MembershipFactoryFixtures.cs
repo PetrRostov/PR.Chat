@@ -35,6 +35,20 @@ namespace PR.Chat.Domain.Tests
             Assert.AreEqual(login, membership.Login);
             Assert.IsTrue(membership.IsPasswordEqual(password));
             Assert.AreEqual(membership.RegisteredAt, registerAt);
+            Assert.IsFalse(membership.IsTemporary);
+
+        }
+
+        [Test]
+        public void CreateTemporary_should_return_correct_object()
+        {
+            var user = new User(false);
+
+
+            var membership = _membershipFactory.CreateTemporary(user);
+
+            Assert.IsTrue(membership.User.SameIdentityAs(user));
+            Assert.IsTrue(membership.IsTemporary);
 
         }
     }

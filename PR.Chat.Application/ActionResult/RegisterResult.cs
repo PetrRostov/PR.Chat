@@ -4,6 +4,6 @@ namespace PR.Chat.Application
 {
     public class RegisterResult
     {
-        public MembershipDto Membership { get; private set; } 
+        public MembershipDto Membership { get; set; } 
     }
 }

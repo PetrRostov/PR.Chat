@@ -23,7 +23,7 @@ namespace PR.Chat.Domain.Tests
             const string pass = @"pass";
             var registeredAt = DateTime.UtcNow;
 
-            var membership = new Membership(_user, login, pass, registeredAt);
+            var membership = new Membership(_user, login, pass, registeredAt, false);
             Assert.AreEqual(membership.User, _user);
             Assert.IsTrue(membership.User.SameIdentityAs(_user));
 

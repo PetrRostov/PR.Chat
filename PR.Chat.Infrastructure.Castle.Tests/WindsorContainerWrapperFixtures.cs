@@ -16,7 +16,7 @@ namespace PR.Chat.Infrastructure.Castle.Tests
         private IWindsorContainer _windsorContainer;
         private WindsorContainerAdapter _adapterContainer;
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void Init()
         {
             _windsorContainer = new WindsorContainer();
@@ -29,7 +29,12 @@ namespace PR.Chat.Infrastructure.Castle.Tests
                     .For<IClassForInjection>()
                     .ImplementedBy<SecondClassForInjection>()
                     .Named("second")
-                    .LifeStyle.Singleton
+                    .LifeStyle.Singleton,
+                Component
+                    .For<IClassForInjection>()
+                    .ImplementedBy<ThirdClassForInjection>()
+                    .Named("third")
+                    .LifeStyle.PerThread
             );
 
             _adapterContainer = new WindsorContainerAdapter(_windsorContainer);

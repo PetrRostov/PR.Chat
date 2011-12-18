@@ -31,7 +31,7 @@ namespace PR.Chat.Infrastructure.Data
                 .FirstOrDefault(entity => entity.Id.Equals(key));
 
             if (element == null)
-                throw new EntityNotFoundException();
+                ExceptionHelper.EntityNotFound<T>("Id", key.ToString());
 
             return element;
         }

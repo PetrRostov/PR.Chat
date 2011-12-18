@@ -53,8 +53,10 @@
     <Compile Include="Authentication\ByPassAuthenticationProvider.cs" />
     <Compile Include="Authentication\IAuthenticationProvider.cs" />
     <Compile Include="Authentication\IAuthenticationProviderFactory.cs" />
+    <Compile Include="Bootstrapper\Bootstrapper.cs" />
+    <Compile Include="Bootstrapper\IBootstrapperTask.cs" />
     <Compile Include="Check\Check.cs" />
-    <Compile Include="DependencyResolver\DependencyResolver.cs" />
+    <Compile Include="DependencyResolver\IoC.cs" />
     <Compile Include="DependencyResolver\IDependencyResolver.cs" />
     <Compile Include="DependencyResolver\IDependencyResolverFactory.cs" />
     <Compile Include="Domain\IEntity.cs" />

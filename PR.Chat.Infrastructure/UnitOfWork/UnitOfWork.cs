@@ -2,12 +2,18 @@
 
 namespace PR.Chat.Infrastructure.UnitOfWork
 {
-    public class UnitOfWork
+    public static class UnitOfWork
     {
         [DebuggerStepThrough]
-        public IUnitOfWork Start()
+        public static IUnitOfWork Start()
         {
-            return DependencyResolver.Resolve<IUnitOfWork>();
+            return IoC.Resolve<IUnitOfWork>();
+        }
+
+        [DebuggerStepThrough]
+        public static IUnitOfWork StartAsync()
+        {
+            return IoC.Resolve<IUnitOfWork>("SingletonUnitOfWork");
         }
     }
 }

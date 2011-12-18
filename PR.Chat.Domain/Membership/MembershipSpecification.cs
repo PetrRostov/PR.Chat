@@ -7,8 +7,16 @@ namespace PR.Chat.Domain
     {
          public static Specification<Membership> LoginEquals(string login)
          {
+             var loginLower = login.ToLowerInvariant();
              return new AdHocSpecification<Membership>(
-                m =>  login.Equals(m.Login, StringComparison.InvariantCultureIgnoreCase)
+                m =>  m.Login.ToLowerInvariant().Equals(loginLower)
+             );
+         }
+
+         public static Specification<Membership> UserOwnerEquals(User user)
+         {
+             return new AdHocSpecification<Membership>(
+                m => m.User.Id == user.Id
              );
          }
     }

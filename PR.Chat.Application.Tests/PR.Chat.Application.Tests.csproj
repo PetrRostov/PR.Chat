@@ -30,7 +30,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\References\Sign\pr.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\References\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +50,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\MappingFixtures.cs" />
+    <Compile Include="MembershipServiceFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PR.Chat.Application\PR.Chat.Application.csproj">
+      <Project>{F19C818B-10D8-4203-8516-ACFC8C97DAA2}</Project>
+      <Name>PR.Chat.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
+      <Project>{18615872-D14D-450B-9980-7DDF41885C61}</Project>
+      <Name>PR.Chat.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
+      <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
+      <Name>PR.Chat.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Test.Common\PR.Chat.Test.Common.csproj">
+      <Project>{C299E429-A7E1-47F7-B228-CAD42CEB989B}</Project>
+      <Name>PR.Chat.Test.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\References\Sign\pr.snk">
+      <Link>pr.snk</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

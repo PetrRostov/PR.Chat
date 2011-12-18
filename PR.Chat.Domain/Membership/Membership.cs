@@ -15,6 +15,8 @@ namespace PR.Chat.Domain
 
         private string _password;
 
+        private readonly bool _isTemporary;
+
         public virtual DateTime RegisteredAt { get { return _registeredAt; } }
 
         public virtual DateTime? LastLogin { get; set; }
@@ -25,7 +27,9 @@ namespace PR.Chat.Domain
 
         public virtual User User { get { return _user; } }
 
-        internal Membership(User user, string login, string password, DateTime registeredAt)
+        public virtual bool IsTemporary {get { return _isTemporary; }}
+
+        internal Membership(User user, string login, string password, DateTime registeredAt, bool isTemporary = false)
         {
             Check.NotNull(user, "user");
             Check.NotNullOrEmpty(login, "login");
@@ -34,6 +38,7 @@ namespace PR.Chat.Domain
             _user           = user;
             _login          = login;
             _registeredAt   = registeredAt;
+            _isTemporary    = isTemporary;
             _password       = password;
         }
 

@@ -50,6 +50,7 @@
     <Compile Include="ConnectionStringProvider.cs" />
     <Compile Include="Exceptions\ConnectionStringNotFoundException.cs" />
     <Compile Include="Exceptions\EntityNotFoundException.cs" />
+    <Compile Include="Exceptions\ExceptionHelper.cs" />
     <Compile Include="IConnectionStringProvider.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IDatabaseFactory.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Exceptions\TransactionAlreadyStartedException.cs" />
     <Compile Include="Exceptions\TransactionInactiveException.cs" />
     <Compile Include="Repository\MembershipRepository.cs" />
+    <Compile Include="Repository\NickRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>

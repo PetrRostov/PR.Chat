@@ -6,15 +6,21 @@ namespace PR.Chat.Application
     {
         EnterResult EnterAsUnregistered(string nickName);
 
-        EnterResult EnterAsRegistered(string email, string password);
+        EnterResult EnterAsRegisteredByNick(string nickName, string password);
+
+        EnterResult EnterAsRegistered(string membershipLogin, string password);
+
+        RegisterResult Register(
+            string email,
+            string password,
+            string repeatPassword
+        );
 
         RegisterResult Register(
             string email, 
             string password, 
             string repeatPassword,
-            string nickName
+            string nickName 
         );
-
-
     }
 }

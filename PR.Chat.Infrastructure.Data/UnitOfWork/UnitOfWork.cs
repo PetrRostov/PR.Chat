@@ -19,6 +19,7 @@ namespace PR.Chat.Infrastructure.Data.UnitOfWork
         {
             Check.NotNull(databaseFactory, "databaseFactory");
             _database = databaseFactory.Create();
+            _database.BeginTransaction();
         }
 
         public void Dispose()

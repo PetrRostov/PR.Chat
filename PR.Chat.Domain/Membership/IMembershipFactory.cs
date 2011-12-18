@@ -10,5 +10,9 @@ namespace PR.Chat.Domain
             string password, 
             DateTime registeredAt
         );
+
+        Membership CreateTemporary(
+            User user
+        );
     }
 }

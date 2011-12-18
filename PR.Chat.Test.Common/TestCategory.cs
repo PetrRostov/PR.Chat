@@ -12,5 +12,9 @@ namespace PR.Chat.Test.Common
         public const string Domain = "Domain";
 
         public const string DataMapping = "DataMapping";
+
+        public const string Application = "Application";
+
+        public const string DtoMapping = "DTOMapping";
     }
 }
