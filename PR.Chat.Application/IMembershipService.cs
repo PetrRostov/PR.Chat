@@ -1,6 +1,4 @@
-﻿using PR.Chat.Application.DTO;
-
-namespace PR.Chat.Application
+﻿namespace PR.Chat.Application
 {
     public interface IMembershipService
     {

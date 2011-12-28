@@ -22,7 +22,7 @@ namespace PR.Chat.Application
         {
             Membership  = membership;
             Nick        = nick;
-            WithNick    = nick == null;
+            WithNick    = nick != null;
         }
     }
 }

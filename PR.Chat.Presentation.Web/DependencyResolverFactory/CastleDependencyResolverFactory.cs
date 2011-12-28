@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Activation;
 using Castle.Facilities.WcfIntegration;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -33,6 +34,7 @@ namespace PR.Chat.Presentation.Web
             RegisterApplicationServices().ToList().ForEach(_registrations.Add);
             RegisterDomainServices().ToList().ForEach(_registrations.Add);
             RegisterBootstrapperTasks().ToList().ForEach(_registrations.Add);
+            RegisterWebServiceHostFactory().ToList().ForEach(_registrations.Add);
             RegisterWebServices().ToList().ForEach(_registrations.Add);
         }
 
@@ -45,6 +47,18 @@ namespace PR.Chat.Presentation.Web
             return new WindsorContainerAdapter(windsorContainer);
         }
 
+        private static IEnumerable<IRegistration> RegisterWebServiceHostFactory()
+        {
+            yield return Component
+                .For<ServiceHostFactoryBase>()
+                .ImplementedBy<DefaultServiceHostFactory>()
+                .LifestyleTransient()
+                .UsingFactoryMethod(
+                    (kernel, creationContext) => new DefaultServiceHostFactory(kernel)
+                );
+            
+        }
+        
 
         private static IEnumerable<IRegistration> RegisterWebServices()
         {
@@ -59,20 +73,12 @@ namespace PR.Chat.Presentation.Web
 
             yield return Component
                 .For<Presentation.Services.IMembershipService>()
-                .ImplementedBy<Services.MembershipService>()
+                .ImplementedBy<Presentation.Services.MembershipService>()
                 .AsWcfService(
                     new DefaultServiceModel().Hosted()
                 )
                 .LifestylePerWcfOperation();
 
-            //throw new NotImplementedException();
-
-            //yield return Component.For<Services.IMembershipService>()
-            //    .ImplementedBy<MembershipService>()
-            //    .AsWcfService(
-            //        new DefaultServiceModel().Hosted()
-            //    )
-            //    .LifestyleTransient();
         }
 
 
@@ -82,6 +88,12 @@ namespace PR.Chat.Presentation.Web
                 .For<IBootstrapperTask>()
                 .ImplementedBy<RegisterRoutesBootstrapperTask>()
                 .Named("RegisterRoutesBootstrapperTask")
+                .LifestyleTransient();
+
+            yield return Component
+                .For<IBootstrapperTask>()
+                .ImplementedBy<RegisterSerivceRoutesBootstrapperTask>()
+                .Named("RegisterSerivceRoutesBootstrapperTask")
                 .LifestyleTransient();
 
             //yield return Component

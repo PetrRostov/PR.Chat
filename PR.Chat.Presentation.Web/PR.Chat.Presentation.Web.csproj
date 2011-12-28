@@ -48,6 +48,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,18 +84,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITest.cs" />
-    <Compile Include="Services\MembershipService.svc.cs">
-      <DependentUpon>MembershipService.svc</DependentUpon>
-    </Compile>
     <Compile Include="Services\Test.svc.cs">
       <DependentUpon>Test.svc</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Services\MembershipService.svc" />
     <Content Include="Services\Test.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
