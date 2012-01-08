@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace PR.Chat.Application.DTO

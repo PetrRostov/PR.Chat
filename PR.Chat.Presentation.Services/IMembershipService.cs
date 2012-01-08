@@ -11,7 +11,7 @@ namespace PR.Chat.Presentation.Services
         EnterResult EnterAsUnregistered(string nickName);
 
         [OperationContract(AsyncPattern = true)]
-        IAsyncResult BeginAsyncOperation(AsyncCallback callback, object asyncState);
+        IAsyncResult BeginAsyncOperation(AsyncCallback asyncCallback, object asyncState);
 
         string EndAsyncOperation(IAsyncResult asyncResult);
     }

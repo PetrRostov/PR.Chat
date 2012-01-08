@@ -40,11 +40,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResult\EnterResult.cs" />
@@ -78,10 +73,6 @@
     <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
       <Project>{18615872-D14D-450B-9980-7DDF41885C61}</Project>
       <Name>PR.Chat.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PR.Chat.Infrastructure.Data\PR.Chat.Infrastructure.Data.csproj">
-      <Project>{46A17C22-604E-4439-B5B7-A5D95DD8B338}</Project>
-      <Name>PR.Chat.Infrastructure.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
       <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>

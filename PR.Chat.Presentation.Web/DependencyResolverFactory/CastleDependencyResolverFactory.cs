@@ -92,8 +92,8 @@ namespace PR.Chat.Presentation.Web
 
             yield return Component
                 .For<IBootstrapperTask>()
-                .ImplementedBy<RegisterSerivceRoutesBootstrapperTask>()
-                .Named("RegisterSerivceRoutesBootstrapperTask")
+                .ImplementedBy<RegisterServiceRoutesBootstrapperTask>()
+                .Named("RegisterServiceRoutesBootstrapperTask")
                 .LifestyleTransient();
 
             //yield return Component

@@ -4,11 +4,11 @@ using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Presentation.Services
 {
-    public class RegisterSerivceRoutesBootstrapperTask : IBootstrapperTask
+    public class RegisterServiceRoutesBootstrapperTask : IBootstrapperTask
     {
         private readonly ServiceHostFactoryBase _serviceHostFactoryBase;
 
-        public RegisterSerivceRoutesBootstrapperTask(ServiceHostFactoryBase serviceHostFactoryBase)
+        public RegisterServiceRoutesBootstrapperTask(ServiceHostFactoryBase serviceHostFactoryBase)
         {
             _serviceHostFactoryBase = serviceHostFactoryBase;
         }

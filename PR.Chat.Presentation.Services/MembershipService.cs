@@ -26,7 +26,7 @@ namespace PR.Chat.Presentation.Services
         }
 
         [WebGet(UriTemplate = "/async")]
-        public IAsyncResult BeginAsyncOperation(AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginAsyncOperation(AsyncCallback asyncCallback, object asyncState)
         {
             var result = new AsyncOperationResult {
                 Value       = "opa",
@@ -36,7 +36,7 @@ namespace PR.Chat.Presentation.Services
                 state => {
                     var asyncResult = (AsyncOperationResult) state;
                     asyncResult.IsCompleted = true;
-                    callback(asyncResult);
+                    asyncCallback(asyncResult);
                 }, 
                 result, 
                 5000, 

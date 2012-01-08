@@ -2,7 +2,6 @@ using System;
 using PR.Chat.Application.DTO;
 using PR.Chat.Domain;
 using PR.Chat.Infrastructure;
-using PR.Chat.Infrastructure.Data;
 using PR.Chat.Infrastructure.UnitOfWork;
 
 
