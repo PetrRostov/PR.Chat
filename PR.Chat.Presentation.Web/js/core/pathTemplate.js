@@ -23,6 +23,8 @@ pathTemplate.prototype = {
       return null;
    }
 };
-window.pathTemplate = pathTemplate;
+   
+window.core = window.core || { };
+window.core.pathTemplate = pathTemplate;
    
 })(jQuery, window);

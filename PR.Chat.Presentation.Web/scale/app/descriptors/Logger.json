@@ -1,0 +1,8 @@
+{
+    "name": "Logger",
+    "acl": {
+        "listen:newData": true,
+        "listen:ready": true
+    },
+    "resources": {}
+}

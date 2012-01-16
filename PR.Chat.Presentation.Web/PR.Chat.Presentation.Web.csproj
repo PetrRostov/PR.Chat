@@ -74,8 +74,11 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="js\core\check.js" />
     <Content Include="js\core\pathTemplate.js" />
     <Content Include="js\core\route.js" />
+    <Content Include="js\core\stringExtension.js" />
+    <Content Include="js\core\template.js" />
     <Content Include="js\core\view.js" />
     <Content Include="js\core\viewManager.js" />
     <Content Include="js\jquery\hashchange\jquery.hashchange.js" />

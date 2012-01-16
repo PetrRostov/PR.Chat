@@ -1,0 +1,8 @@
+{
+    "name": "MessageView",
+    "acl": {
+        "trigger:newData:display": true,
+        "listen:newData": true
+    },
+    "resources": {}
+}

@@ -1,0 +1,13 @@
+{
+    "modules": ["MessageView", "DataGenerator", "Logger", "Hook"],
+    "layout": {
+        "MessageView": ".b-message-view"
+    },
+    "locale": "ru",
+    "path": {
+        "descriptor": "./app/descriptors/",
+        "module": "./app/modules/",
+        "locale": "./app/locales/",
+        "template": "./app/templates/"
+    }
+}
