@@ -1,4 +1,4 @@
-﻿(function($, window) {
+﻿(function($, window, core) {
 
 var viewManager = {
    activeViews       : {},
@@ -20,7 +20,7 @@ var viewManager = {
       
    }
 };
+
+core.viewManager = viewManager;
    
-   
-   
-})(jQuery, window);
+})(jQuery, window, window.core);

@@ -75,6 +75,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="js\core\check.js" />
+    <Content Include="js\core\eventManager.js" />
     <Content Include="js\core\pathTemplate.js" />
     <Content Include="js\core\route.js" />
     <Content Include="js\core\stringExtension.js" />

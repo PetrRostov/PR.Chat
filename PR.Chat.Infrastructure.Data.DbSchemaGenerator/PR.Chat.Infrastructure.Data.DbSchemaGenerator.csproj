@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PR.Chat.Infrastructure.Data.DbSchemaGenerator</RootNamespace>
-    <AssemblyName>PR.Chat.Infrastructure.Data.DbSchemaGenerator</AssemblyName>
+    <AssemblyName>DbSchemaGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
