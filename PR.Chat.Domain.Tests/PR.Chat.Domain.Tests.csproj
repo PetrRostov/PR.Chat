@@ -59,6 +59,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chat\ChatFixtures.cs" />
     <Compile Include="Membership\MembershipFactoryFixtures.cs" />
     <Compile Include="Membership\MembershipFixtures.cs" />
     <Compile Include="Membership\MembershipServiceFixtures.cs" />
@@ -87,6 +88,7 @@
       <Link>pr.snk</Link>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

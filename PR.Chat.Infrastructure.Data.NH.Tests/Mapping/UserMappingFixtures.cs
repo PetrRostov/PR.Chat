@@ -30,11 +30,12 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
                 Session.Save(nick1);
                 Session.Save(nick2);
 
+                //Assert.AreEqual(user.Nicks.Count, 2); 
+
                 tran.Commit();
             }
-
             Session.Clear();
-
+            
             using (var tran = Session.BeginTransaction())
             {
                 var loadedUser = Session.Query<User>().Where(u => u.Id == user.Id).First();
@@ -43,7 +44,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
                 Assert.AreEqual(user.IsRegistered, loadedUser.IsRegistered);
                 Assert.True(user.SameIdentityAs(loadedUser));
                 
-                Assert.AreEqual(loadedUser.Nicks.Count(), 2);
+                Assert.AreEqual(loadedUser.Nicks.Count, 2);
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick1.Name));
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick2.Name));
 

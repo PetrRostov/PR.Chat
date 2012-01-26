@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Infrastructure.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Presentation.Web", "PR.Chat.Presentation.Web\PR.Chat.Presentation.Web.csproj", "{7BED265A-A688-4918-853D-94C3EDD37354}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PR.Chat.Infrastructure.ExpressionSerialization", "PR.Chat.Infrastructure.ExpressionSerialization\PR.Chat.Infrastructure.ExpressionSerialization.csproj", "{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,16 @@ Global
 		{7BED265A-A688-4918-853D-94C3EDD37354}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7BED265A-A688-4918-853D-94C3EDD37354}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7BED265A-A688-4918-853D-94C3EDD37354}.Release|x86.ActiveCfg = Release|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,6 @@ namespace PR.Chat.Infrastructure.Data.NH
 {
     public class NHibernateDatabaseFactory : IDatabaseFactory, IDisposable
     {
-        private readonly INHibernateDatabaseConfigurator _configurator;
         private readonly ISessionFactory _sessionFactory;
         private IDatabase _database;
 

@@ -72,9 +72,7 @@
     <Compile Include="ExpressionCombining\ExpressionVisitor.cs" />
     <Compile Include="ExpressionCombining\ParameterRebinder.cs" />
     <Compile Include="ExpressionCombining\Utility.cs" />
-    <Compile Include="ExpressionSerialization\ExpressionSerializer.cs" />
     <Compile Include="ExpressionSerialization\ExpressionUtility.cs" />
-    <Compile Include="ExpressionSerialization\TypeResolver.cs" />
     <Compile Include="OrSpecification.cs" />
     <Compile Include="Specification.cs" />
     <Compile Include="NegateSpecification.cs" />
@@ -101,6 +99,12 @@
     <None Include="..\References\Sign\pr.snk">
       <Link>pr.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PR.Chat.Infrastructure.ExpressionSerialization\PR.Chat.Infrastructure.ExpressionSerialization.csproj">
+      <Project>{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}</Project>
+      <Name>PR.Chat.Infrastructure.ExpressionSerialization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

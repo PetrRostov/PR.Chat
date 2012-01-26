@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
@@ -12,7 +14,10 @@ namespace PR.Chat.Domain
 
         public virtual Guid Id { get { return _id; } }
 
-        public virtual ICollection<Nick> Nicks { get { return _nicks; } }
+        public virtual ICollection<Nick> Nicks
+        {
+            get { return _nicks.ToList().AsReadOnly(); }
+        }
 
         public virtual bool IsRegistered  { get { return _isRegistered; } }
 
@@ -52,7 +57,11 @@ namespace PR.Chat.Domain
         {
             Check.NotNullOrEmpty(name, "name");
 
-            return new Nick(this, name);
+            var nick = new Nick(this, name);
+
+            _nicks.Add(nick);
+
+            return nick;
         }
 
         public virtual void SetAsRegistered()

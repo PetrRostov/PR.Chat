@@ -80,6 +80,8 @@ namespace PR.Chat.Domain.Tests
             var user = new User(false);
             Nick nick = user.CreateNick("NickName");
 
+            CollectionAssert.Contains(user.Nicks, nick);
+
             Assert.AreEqual(nick.Name, nickName);
         }
 

@@ -14,6 +14,7 @@ namespace PR.Chat.Infrastructure.Data.DbSchemaGenerator
             
             new SchemaExport(configurator.GetConfiguration())
                 .Create(true, false);
+
         }
     }
 
