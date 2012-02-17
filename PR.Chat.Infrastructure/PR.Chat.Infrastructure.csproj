@@ -65,6 +65,7 @@
     <Compile Include="Permission\IRightRuleRepository.cs" />
     <Compile Include="Permission\PermissionDimensionAttribute.cs" />
     <Compile Include="Permission\RequiredPermissionAttribute.cs" />
+    <Compile Include="Permission\RightContextInterceptor.cs" />
     <Compile Include="Permission\RightContextProxyBuilder.cs" />
     <Compile Include="Permission\RightRule.cs" />
     <Compile Include="ProxyBuilder\IInterceptor.cs" />

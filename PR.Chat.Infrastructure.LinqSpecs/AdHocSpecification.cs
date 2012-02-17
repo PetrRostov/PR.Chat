@@ -24,9 +24,9 @@ namespace PR.Chat.Infrastructure.LinqSpecs
             //var cleanedExpression = ExpressionUtility.Ensure(specification);
 
             this.specification = specification;
-            var serializer = new ExpressionSerializer();
-            var serializedExpression = serializer.Serialize(specification);
-            serializedExpressionXml = serializedExpression.ToString();
+            //var serializer = new ExpressionSerializer();
+            //var serializedExpression = serializer.Serialize(specification);
+            //serializedExpressionXml = serializedExpression.ToString();
         }
 
         public override Expression<Func<T, bool>> IsSatisfiedBy()

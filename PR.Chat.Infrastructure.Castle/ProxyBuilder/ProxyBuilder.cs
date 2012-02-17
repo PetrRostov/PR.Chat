@@ -45,27 +45,4 @@ namespace PR.Chat.Infrastructure.Castle
 
         #endregion
     }
-
-    public class ProxyGenerationHook : IProxyGenerationHook
-    {
-
-        #region Implementation of IProxyGenerationHook
-
-        public void MethodsInspected()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
 }
