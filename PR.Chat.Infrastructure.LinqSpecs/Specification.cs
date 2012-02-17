@@ -9,7 +9,7 @@ using System.Linq;
 namespace PR.Chat.Infrastructure.LinqSpecs
 {
 	[Serializable]
-	public abstract class Specification<T>
+	public abstract class Specification<T> : ISpecification<T>
 	{
 		public abstract Expression<Func<T, bool>> IsSatisfiedBy();
 

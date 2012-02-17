@@ -47,8 +47,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WindsorContainerAdapter.cs" />
+    <Compile Include="DependencyResolver\WindsorContainerAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyBuilder\CastleInvocationAdapter.cs" />
+    <Compile Include="ProxyBuilder\ChatInterceptorAdapter.cs" />
+    <Compile Include="ProxyBuilder\ProxyBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\References\Sign\pr.snk">

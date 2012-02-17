@@ -12,7 +12,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
     public class MembershipMappingFixtures : BaseMappingFixtures
     {
         public MembershipMappingFixtures()
-            : base(typeof(NHibernateDatabase).Assembly)
+            : base(typeof(PerSessionNHibernateDatabase).Assembly)
         {
         }
 

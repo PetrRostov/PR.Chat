@@ -3,9 +3,9 @@ using PR.Chat.Infrastructure.LinqSpecs;
 
 namespace PR.Chat.Domain
 {
-    public static class NickSpecification
+    public static class NickSpecifications
     {
-         public static Specification<Nick> NameEquals(string nickName)
+         public static Specification<Nick> NameMustEquals(string nickName)
          {
              var nickNameLower = nickName.ToLowerInvariant();
              return new AdHocSpecification<Nick>(

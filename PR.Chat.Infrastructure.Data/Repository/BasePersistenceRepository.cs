@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace PR.Chat.Infrastructure.Data
 {
-    public abstract class BaseRepository<T, TKey> : IRepository<T, TKey>
+    public abstract class BasePersistenceRepository<T, TKey> : IRepository<T, TKey>
         where T : class, IEntity<T, TKey>
     {
         protected readonly IDatabase Database;
 
-        protected BaseRepository(IDatabaseFactory databaseFactory)
+        protected BasePersistenceRepository(IDatabaseFactory databaseFactory)
         {
             Check.NotNull(databaseFactory, "databaseFactory");
             Database = databaseFactory.Create();
         }
 
-        protected BaseRepository(IDatabase database)
+        protected BasePersistenceRepository(IDatabase database)
         {
             Check.NotNull(database, "database");
             Database = database;

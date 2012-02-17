@@ -49,7 +49,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         [Test]
         public void GetByName_should_throw_exception_if_entity_not_found()
         {
-            Assert.Throws<EntityNotFoundException<Nick>>(() => _nickRepository.GetByName("sfdf"));
+            Assert.Throws<EntityNotFoundException>(() => _nickRepository.GetByName("sfdf"));
         }
 
         [Test]

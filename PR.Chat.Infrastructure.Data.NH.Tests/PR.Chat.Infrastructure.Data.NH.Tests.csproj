@@ -59,10 +59,13 @@
     <Compile Include="DatabaseFixtures.cs" />
     <Compile Include="Mapping\MembershipMappingFixtures.cs" />
     <Compile Include="Mapping\NickMappingFixtures.cs" />
+    <Compile Include="Mapping\RightRuleMappingFixtures.cs" />
     <Compile Include="Mapping\UserMappingFixtures.cs" />
     <Compile Include="MsSql2008NHibernateDatabaseConfiguratorFixtures.cs" />
     <Compile Include="NHibernateDatabaseFactoryFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeConverters\ExpressionTest.cs" />
+    <Compile Include="TypeConverters\LambdaExpressionTypeConverterFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PR.Chat.Domain\PR.Chat.Domain.csproj">
@@ -96,6 +99,11 @@
       <Link>SQLite.Interop.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TypeConverters\ExpressionTest.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

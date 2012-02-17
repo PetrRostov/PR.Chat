@@ -16,7 +16,7 @@ namespace PR.Chat.Domain
 
         public virtual ICollection<Nick> Nicks
         {
-            get { return _nicks.ToList().AsReadOnly(); }
+            get { return _nicks; }
         }
 
         public virtual bool IsRegistered  { get { return _isRegistered; } }

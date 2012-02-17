@@ -1,4 +1,5 @@
 using System;
+using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Application
 {
@@ -6,6 +7,9 @@ namespace PR.Chat.Application
     {
         public MappingKey(Type from, Type to)
         {
+            Check.NotNull(from, "from");
+            Check.NotNull(to, "to");
+
             From    = from;
             To      = to;
         }

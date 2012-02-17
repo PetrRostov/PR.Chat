@@ -16,7 +16,7 @@ namespace PR.Chat.Infrastructure.Data.NH
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class EnumerationTypeConverter<T> : IUserType
-        where T : Enumeration
+        where T : Enumeration.Enumeration
     {
         #region Implementation of IUserType
 
@@ -44,13 +44,13 @@ namespace PR.Chat.Infrastructure.Data.NH
                 return null;
             }
 
-            object res = Enumeration.FromValue<T>(enumName);
+            object res = Enumeration.Enumeration.FromValue<T>(enumName);
             return res;
         }
 
         public void NullSafeSet(IDbCommand cmd, object value, int index)
         {
-            var id = value as Enumeration;
+            var id = value as Enumeration.Enumeration;
 
             NHibernateUtil.String.NullSafeSet(cmd, id == null ? null : id.Value, index);
         }
@@ -77,7 +77,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public SqlType[] SqlTypes
         {
-            get { return new[] { SqlTypeFactory.GetString(25) }; }
+            get { return new[] { SqlTypeFactory.GetString(50) }; }
         }
 
         public Type ReturnedType

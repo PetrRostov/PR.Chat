@@ -33,7 +33,7 @@ namespace PR.Chat.Infrastructure.ExpressionSerialization
             //typeof(System.Runtime.Serialization.Json.DataContractJsonSerializer).Assembly,			
             //typeof(System.Json.JsonObject).Assembly,
             typeof(XElement).Assembly,			 
-            Assembly.GetExecutingAssembly(),			
+            Assembly.GetExecutingAssembly(),	
         };
 
 
@@ -53,7 +53,9 @@ namespace PR.Chat.Infrastructure.ExpressionSerialization
             {
                 foreach (var a in @assemblies)
                     this.assemblies.Add(a);
-            }			
+            }
+
+            this.assemblies.UnionWith(AppDomain.CurrentDomain.GetAssemblies());
 
             var simpleTypes = from t in typeof(System.String).Assembly.GetTypes()
                              where								 

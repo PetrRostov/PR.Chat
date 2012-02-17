@@ -13,7 +13,7 @@ namespace PR.Chat.Infrastructure.Data
 
         TKey AddOnSubmit<T, TKey>(IEntity<T, TKey> entity);
 
-        void Submit();
+        void SubmitChanges();
         void BeginTransaction();
     }
 }

@@ -5,7 +5,7 @@ using PR.Chat.Domain;
 
 namespace PR.Chat.Infrastructure.Data
 {
-    public class MembershipRepository : BaseRepository<Membership, Guid>, IMembershipRepository
+    public class MembershipRepository : BasePersistenceRepository<Membership, Guid>, IMembershipRepository
     {
         public MembershipRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
@@ -18,7 +18,7 @@ namespace PR.Chat.Infrastructure.Data
         public Membership GetByLogin(string login)
         {
             var membership = GetSource()
-                .Where(MembershipSpecification.LoginEquals(login).IsSatisfiedBy())
+                .Where(MembershipSpecification.LoginMustEquals(login))
                 .FirstOrDefault();
 
             if (membership == null)
@@ -30,7 +30,7 @@ namespace PR.Chat.Infrastructure.Data
         public IEnumerable<Membership> GetByUser(User user)
         {
             return GetSource()
-                .Where(MembershipSpecification.UserOwnerEquals(user).IsSatisfiedBy())
+                .Where(MembershipSpecification.UserOwnerMustEquals(user))
                 .ToList()
                 .AsReadOnly();
         }
@@ -38,7 +38,7 @@ namespace PR.Chat.Infrastructure.Data
         public bool ExistsWithLogin(string login)
         {
             var membership = GetSource()
-                .Where(MembershipSpecification.LoginEquals(login).IsSatisfiedBy())
+                .Where(MembershipSpecification.LoginMustEquals(login))
                 .FirstOrDefault();
 
             return membership != null;

@@ -48,8 +48,8 @@ namespace PR.Chat.Infrastructure.ExpressionSerialization
 
         public XElement Serialize(Expression e)
         {
-            if (e.NodeType != ExpressionType.Lambda)
-                e = Evaluator.PartialEval(e);//TODO: decide should we call PartialEval or not at all?
+            //if (e.NodeType != ExpressionType.Lambda)
+            e = Evaluator.PartialEval(e);//TODO: decide should we call PartialEval or not at all?
             return GenerateXmlFromExpressionCore(e);
         }
 

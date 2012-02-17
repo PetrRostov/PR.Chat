@@ -11,7 +11,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
     public class BaseRepositoryFixtures
     {
         private Mock<IDatabase> _database;
-        private BaseRepositoryImpl _repository;
+        private BasePersistenceRepositoryImpl _persistenceRepository;
         private IList<TestEntity> _entities;
 
         [TestFixtureSetUp]
@@ -33,21 +33,21 @@ namespace PR.Chat.Infrastructure.Data.Tests
                 .Returns(_entities.AsQueryable)
                 .Verifiable();
             
-            _repository = new BaseRepositoryImpl(_database.Object);
+            _persistenceRepository = new BasePersistenceRepositoryImpl(_database.Object);
         }
 
         [Test]
         public void Constructor_should_throw_exception_if_argument_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new BaseRepositoryImpl((IDatabase) null));
-            Assert.Throws<ArgumentNullException>(() => new BaseRepositoryImpl((IDatabaseFactory)null));
+            Assert.Throws<ArgumentNullException>(() => new BasePersistenceRepositoryImpl((IDatabase) null));
+            Assert.Throws<ArgumentNullException>(() => new BasePersistenceRepositoryImpl((IDatabaseFactory)null));
         }
 
         [Test]
         public void Add_should_call_IDatabase_AddOnSubmit()
         {
             var entity = new TestEntity();
-            _repository.Add(entity);
+            _persistenceRepository.Add(entity);
             _database.Verify(d => d.AddOnSubmit(entity));
         }
 
@@ -55,7 +55,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         public void Remove_should_call_IDatabase_DeleteOnSubmit()
         {
             var entity = new TestEntity();
-            _repository.Remove(entity);
+            _persistenceRepository.Remove(entity);
             _database.Verify(d => d.DeleteOnSubmit(entity));
         }
 
@@ -63,7 +63,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         public void Update_should_call_IDatabase_UpdateOnSubmit()
         {
             var entity = new TestEntity();
-            _repository.Update(entity);
+            _persistenceRepository.Update(entity);
             _database.Verify(d => d.UpdateOnSubmit(entity));
         }
 
@@ -71,7 +71,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         public void GetById_should_return_correct_result()
         {
             var entity = _entities[0];
-            var repoEntity = _repository.GetById(entity.Id);
+            var repoEntity = _persistenceRepository.GetById(entity.Id);
             Assert.AreSame(entity, repoEntity);
             _database.Verify(d => d.GetSource<TestEntity, Guid>());
         }
@@ -80,7 +80,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         public void GetAll_should_return_correct_result()
         {
             
-            var repoEntities = _repository.GetAll();
+            var repoEntities = _persistenceRepository.GetAll();
             CollectionAssert.AreEquivalent(repoEntities, _entities);
             _database.Verify(d => d.GetSource<TestEntity, Guid>());
         }

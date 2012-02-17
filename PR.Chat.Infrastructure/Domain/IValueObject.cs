@@ -1,4 +1,4 @@
-namespace PR.Chat.Domain
+namespace PR.Chat.Infrastructure
 {
     /// <summary>
     /// A value object, as described in the DDD book.

@@ -143,14 +143,14 @@ namespace PR.Chat.Presentation.Web
 
             yield return Component
                 .For<IDatabaseFactory>()
-                .ImplementedBy<NHibernateDatabaseFactory>()
+                .ImplementedBy<PerSessionFactoryNHibernateDatabaseFactory>()
                 .DependsOn(Dependency.OnComponent(typeof(INHibernateDatabaseConfigurator), "MsSql2008NHibernateDatabaseConfigurator"))
                 .Named("DatabaseFactory")
-                .LifestylePerWcfOperation();
+                .LifestyleSingleton();
 
             yield return Component
                 .For<IDatabaseFactory>()
-                .ImplementedBy<NHibernateDatabaseFactory>()
+                .ImplementedBy<PerSessionFactoryNHibernateDatabaseFactory>()
                 .LifestyleSingleton()
                 .Named("SingletonDatabaseFactory");
 

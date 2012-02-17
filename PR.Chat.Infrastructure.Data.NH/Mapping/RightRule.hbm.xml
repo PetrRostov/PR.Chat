@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<hibernate-mapping 
+   xmlns="urn:nhibernate-mapping-2.2" 
+   assembly="PR.Chat.Infrastructure"  
+   namespace="PR.Chat.Infrastructure" 
+   default-access="property"
+>
+
+   <class name="RightRule" table="RightRules" schema="Portal" mutable="false">
+      <id name="Id" column="Id" type="Guid" >
+         <generator class="guid.comb"/>
+      </id>
+      <property name="OwnerId" column="OwnerId" type="Guid" not-null="true"  />
+      <property 
+         name="CheckExpression" 
+         column="CheckExpression" 
+         type="PR.Chat.Infrastructure.Data.NH.LambdaExpressionTypeConverter, PR.Chat.Infrastructure.Data.NH" 
+         not-null="true"  
+      />
+      <property
+         name="Permission"
+         column="Permission"
+         type="PR.Chat.Infrastructure.Data.NH.PermissionTypeConverter, PR.Chat.Infrastructure.Data.NH"
+         not-null="true"
+      />
+      
+      <property name="ExpiredAt" column="ExpiredAt" type="DateTime" not-null="true" />
+   </class>
+   
+</hibernate-mapping>

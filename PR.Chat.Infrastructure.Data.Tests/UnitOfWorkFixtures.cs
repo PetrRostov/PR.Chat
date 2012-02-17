@@ -14,7 +14,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         public void Init()
         {
             database = new Mock<IDatabase>();
-            database.Setup(d => d.Submit()).Verifiable();
+            database.Setup(d => d.SubmitChanges()).Verifiable();
             database.Setup(d => d.BeginTransaction()).Verifiable();
         }
 
@@ -38,7 +38,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         {
             var unitOfWork = new UnitOfWork.UnitOfWork(database.Object);
             unitOfWork.Commit();
-            database.Verify(d => d.Submit());
+            database.Verify(d => d.SubmitChanges());
         }
 
         [Test]

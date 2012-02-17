@@ -36,7 +36,7 @@ namespace PR.Chat.Domain.Tests
             //Assert.AreNotEqual(nick1.Id, nick2.Id);
         }
 
-        [Test, Ignore]
+        [Test]
         public void SameIdentityAs_should_return_true_for_equals_Names()
         {
             var nick1 = new Nick(_user, "name");

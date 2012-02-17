@@ -11,7 +11,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
     public class UserMappingFixtures : BaseMappingFixtures
     {
         public UserMappingFixtures() 
-            : base(typeof(NHibernateDatabase).Assembly)
+            : base(typeof(PerSessionNHibernateDatabase).Assembly)
         {
         }
 

@@ -25,5 +25,10 @@ namespace PR.Chat.Presentation.Web
 
             IoC.InitializeWith(containerConfigurator); 
         }
+
+        protected void Application_End()
+        {
+            IoC.Close();
+        }
     }
 }

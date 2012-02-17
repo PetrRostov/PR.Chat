@@ -12,8 +12,8 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
         [Test]
         public void Constructor_should_throw_exception_if_arguments_is_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new NHibernateDatabaseFactory((ISessionFactory) null));
-            Assert.Throws<ArgumentNullException>(() => new NHibernateDatabaseFactory((INHibernateDatabaseConfigurator)null));
+            Assert.Throws<ArgumentNullException>(() => new PerSessionFactoryNHibernateDatabaseFactory((ISessionFactory) null));
+            Assert.Throws<ArgumentNullException>(() => new PerSessionFactoryNHibernateDatabaseFactory((INHibernateDatabaseConfigurator)null));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
 
             sessionFactory.Setup(s => s.OpenSession()).Returns(session.Object);
 
-            var databaseFactory = new NHibernateDatabaseFactory(sessionFactory.Object);
+            var databaseFactory = new PerSessionFactoryNHibernateDatabaseFactory(sessionFactory.Object);
 
             Assert.AreSame(databaseFactory.Create(), databaseFactory.Create());
         }
@@ -37,9 +37,9 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
 
             sessionFactory.Setup(s => s.OpenSession()).Returns(session.Object);
 
-            var databaseFactory = new NHibernateDatabaseFactory(sessionFactory.Object);
+            var databaseFactory = new PerSessionFactoryNHibernateDatabaseFactory(sessionFactory.Object);
 
-            Assert.IsInstanceOf<NHibernateDatabase>(databaseFactory.Create());
+            Assert.IsInstanceOf<PerSessionFactoryNHibernateDatabase>(databaseFactory.Create());
         }
     }
 }

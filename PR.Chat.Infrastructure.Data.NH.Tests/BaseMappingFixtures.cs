@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using NHibernate;
 using NHibernate.Bytecode;
 using NHibernate.Cfg;
@@ -14,35 +15,63 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
 {
     public class BaseMappingFixtures : IDisposable
     {
-        private static Configuration _configuration;
-        private static ISessionFactory _sessionFactory;
+        protected static Configuration _configuration;
+        protected static ISessionFactory _sessionFactory;
         protected ISession Session;
+        protected static Assembly CurrentAssembly;
+        private static ReaderWriterLockSlim _configurationLock = new ReaderWriterLockSlim();
 
         public BaseMappingFixtures(Assembly assemblyContainingMapping)
         {
-            if (_configuration == null)
+            _configurationLock.EnterUpgradeableReadLock();
+            try
             {
-                _configuration = new Configuration()
-                    .SetProperty(Environment.ReleaseConnections, "on_close")
-                    .SetProperty(Environment.Dialect, typeof(SQLiteDialect).AssemblyQualifiedName)
-                    .SetProperty(Environment.ConnectionDriver, typeof(SQLite20Driver).AssemblyQualifiedName)
-                    .SetProperty(Environment.ConnectionString, "data source=:memory:")
-                    .SetProperty(Environment.ProxyFactoryFactoryClass, typeof(DefaultProxyFactoryFactory).AssemblyQualifiedName)
-                    .SetProperty(Environment.ShowSql, "true")
-                    .AddAssembly(assemblyContainingMapping);
+                if (_configuration == null)
+                {
+                    _configurationLock.EnterWriteLock();
+                    try
+                    {
+                        if (_configuration == null)
+                        {
+                            CurrentAssembly = assemblyContainingMapping;
+                            _configuration = GetSQLiteInMemoryConfiguration()
+                                .AddAssembly(assemblyContainingMapping);
 
-                _sessionFactory = _configuration.BuildSessionFactory();
+                            _sessionFactory = _configuration.BuildSessionFactory();
+                        }
+                    }
+                    finally
+                    {
+                        _configurationLock.ExitWriteLock();
+                    }
+                }
+
+                Session = _sessionFactory.OpenSession();
+
+                new SchemaExport(_configuration).Execute(
+                    true,
+                    true,
+                    false,
+                    Session.Connection,
+                    Console.Out
+                );  
+            }
+            finally
+            {
+                _configurationLock.ExitUpgradeableReadLock();
             }
 
-            Session = _sessionFactory.OpenSession();
+        }
 
-            new SchemaExport(_configuration).Execute(
-                true, 
-                true, 
-                false, 
-                Session.Connection, 
-                Console.Out
-            );  
+        public static Configuration GetSQLiteInMemoryConfiguration()
+        {
+            return new Configuration()
+                .SetProperty(Environment.ReleaseConnections, "on_close")
+                .SetProperty(Environment.Dialect, typeof(SQLiteDialect).AssemblyQualifiedName)
+                .SetProperty(Environment.ConnectionDriver, typeof(SQLite20Driver).AssemblyQualifiedName)
+                .SetProperty(Environment.ConnectionString, "data source=:memory:")
+                .SetProperty(Environment.ProxyFactoryFactoryClass, typeof(DefaultProxyFactoryFactory).AssemblyQualifiedName)
+                .SetProperty(Environment.ShowSql, "true");
         }
 
         [TestFixtureTearDown]

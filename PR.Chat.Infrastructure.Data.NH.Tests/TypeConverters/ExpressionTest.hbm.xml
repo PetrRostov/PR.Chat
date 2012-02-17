@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<hibernate-mapping 
+   xmlns="urn:nhibernate-mapping-2.2" 
+   assembly="PR.Chat.Infrastructure.Data.NH.Tests"  
+   namespace="PR.Chat.Infrastructure.Data.NH.Tests" 
+   default-access="nosetter.camelcase-underscore"
+>
+
+   <class name="ExpressionTest" table="ExpressionTest" schema="Portal">
+      <id name="Id" column="Id" type="Guid" >
+         <generator class="guid.comb"/>
+      </id>
+      <property 
+         name="LambdaExpression" 
+         column="LambdaExpression" 
+         type="PR.Chat.Infrastructure.Data.NH.LambdaExpressionTypeConverter, PR.Chat.Infrastructure.Data.NH" 
+         not-null="true" 
+      />
+      
+   </class>
+   
+</hibernate-mapping>

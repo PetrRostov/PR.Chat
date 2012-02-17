@@ -41,11 +41,15 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chat\Chat.cs" />
     <Compile Include="Common\Color.cs" />
     <Compile Include="Common\DomainObjectUtils.cs" />
     <Compile Include="Common\FontSize.cs" />
     <Compile Include="Common\IAggregate.cs" />
     <Compile Include="Common\IDomainEvent.cs" />
+    <Compile Include="RightRule\PermissionNotFoundException.cs" />
+    <Compile Include="RightRule\Permission`1.cs" />
+    <Compile Include="Common\RepositoryProvider.cs" />
     <Compile Include="Membership\IMembershipFactory.cs" />
     <Compile Include="Membership\IMembershipRepository.cs" />
     <Compile Include="Membership\IMembershipService.cs" />
@@ -54,10 +58,19 @@
     <Compile Include="Membership\MembershipFactory.cs" />
     <Compile Include="Membership\MembershipService.cs" />
     <Compile Include="Membership\MembershipSpecification.cs" />
+    <Compile Include="Message\FormattedText.cs" />
+    <Compile Include="Message\IMessageReceiver.cs" />
+    <Compile Include="Message\IMessageSender.cs" />
+    <Compile Include="Message\Message.cs" />
     <Compile Include="Nick\INickRepository.cs" />
     <Compile Include="Nick\Nick.cs" />
-    <Compile Include="Nick\NickSpecification.cs" />
+    <Compile Include="Nick\NickSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightRule\Permission.cs" />
+    <Compile Include="Room\IRoomBuilder.cs" />
+    <Compile Include="Room\IRoomRepository.cs" />
+    <Compile Include="Room\Room.cs" />
+    <Compile Include="Room\RoomBuilder.cs" />
     <Compile Include="User\IUserFactory.cs" />
     <Compile Include="User\IUserRepository.cs" />
     <Compile Include="User\User.cs" />
@@ -78,10 +91,7 @@
       <Link>pr.snk</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Chat\" />
-    <Folder Include="Room\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

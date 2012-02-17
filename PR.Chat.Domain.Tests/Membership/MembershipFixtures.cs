@@ -69,7 +69,7 @@ namespace PR.Chat.Domain.Tests
         [Test]
         public void GetHashcode_should_return_equals_values_for_equals_Names()
         {
-            var membership1 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
+            var membership1 = new Membership(_user, "naMe1", "pass", DateTime.UtcNow);
             var membership2 = new Membership(_user, "name1", "pass", DateTime.UtcNow);
 
             Assert.AreEqual(membership1.GetHashCode(), membership2.GetHashCode());

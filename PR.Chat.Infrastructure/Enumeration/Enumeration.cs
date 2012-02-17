@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace PR.Chat.Infrastructure
+namespace PR.Chat.Infrastructure.Enumeration
 {
     public abstract class Enumeration : IComparable
     {

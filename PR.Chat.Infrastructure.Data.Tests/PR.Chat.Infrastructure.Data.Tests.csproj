@@ -46,11 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepositoryFixtures.cs" />
-    <Compile Include="BaseRepositoryImpl.cs" />
+    <Compile Include="BasePersistenceRepositoryImpl.cs" />
     <Compile Include="ConnectionStringProviderFixtures.cs" />
     <Compile Include="MembershipRepositoryFixtures.cs" />
     <Compile Include="NickRepositoryFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightRuleFixtures.cs" />
     <Compile Include="UnitOfWorkFixtures.cs" />
   </ItemGroup>
   <ItemGroup>

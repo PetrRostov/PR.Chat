@@ -2,7 +2,7 @@
 
 namespace PR.Chat.Infrastructure.Data
 {
-    public class EntityNotFoundException<T> : Exception
+    public class EntityNotFoundException : Exception
     {
         public EntityNotFoundException()
         {

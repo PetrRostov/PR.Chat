@@ -28,14 +28,14 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
             
             _transaction.Setup(t => t.Commit()).Verifiable();
 
-            _database = new NHibernateDatabase(_session.Object);
+            _database = new PerSessionNHibernateDatabase(_session.Object);
         }
 
         [Test]
         public void Constructor_should_throw_exception_if_argument_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new NHibernateDatabase((ISession)null));
-            Assert.Throws<ArgumentNullException>(() => new NHibernateDatabase((ISessionFactory)null));
+            Assert.Throws<ArgumentNullException>(() => new PerSessionNHibernateDatabase((ISession)null));
+            Assert.Throws<ArgumentNullException>(() => new PerSessionNHibernateDatabase((ISessionFactory)null));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
             _session.SetupGet(s => s.Transaction).Returns(_transaction.Object).Verifiable();
             _transaction.SetupGet(t => t.IsActive).Returns(true);
 
-            _database.Submit();
+            _database.SubmitChanges();
             _session.Verify(s => s.Transaction);
             _transaction.Verify(t => t.IsActive);
             _transaction.Verify(t => t.Commit());
@@ -72,13 +72,13 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests
         {
             _session.SetupGet(s => s.Transaction).Returns(_transaction.Object).Verifiable();
             _transaction.SetupGet(t => t.IsActive).Returns(false);
-            Assert.Throws<TransactionInactiveException>(() => _database.Submit());
+            Assert.Throws<TransactionInactiveException>(() => _database.SubmitChanges());
 
             _session.Verify(s => s.Transaction);
             _transaction.Verify(t => t.IsActive);
 
             _session.SetupGet(s => s.Transaction).Returns((ITransaction)null);
-            Assert.Throws<TransactionInactiveException>(() => _database.Submit());
+            Assert.Throws<TransactionInactiveException>(() => _database.SubmitChanges());
         }
 
         [Test]

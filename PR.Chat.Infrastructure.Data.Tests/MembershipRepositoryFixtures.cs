@@ -52,7 +52,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         [Test]
         public void GetByLogin_should_throw_exception_if_entity_not_found()
         {
-            Assert.Throws<EntityNotFoundException<Membership>>(() => _membershipRepository.GetByLogin("loGin12"));
+            Assert.Throws<EntityNotFoundException>(() => _membershipRepository.GetByLogin("loGin12"));
         }
 
 

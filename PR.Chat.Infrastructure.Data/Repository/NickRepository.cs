@@ -4,7 +4,7 @@ using PR.Chat.Domain;
 
 namespace PR.Chat.Infrastructure.Data
 {
-    public class NickRepository : BaseRepository<Nick, Guid>, INickRepository
+    public class NickRepository : BasePersistenceRepository<Nick, Guid>, INickRepository
     {
         public NickRepository(IDatabaseFactory databaseFactory) : base(databaseFactory)
         {
@@ -17,7 +17,7 @@ namespace PR.Chat.Infrastructure.Data
         public Nick GetByName(string nickName)
         {
             var nick = GetSource()
-                .Where(NickSpecification.NameEquals(nickName).IsSatisfiedBy())
+                .Where(NickSpecifications.NameMustEquals(nickName))
                 .FirstOrDefault();
 
             if (nick == null)
@@ -28,11 +28,9 @@ namespace PR.Chat.Infrastructure.Data
 
         public bool ExistsWithName(string nickName)
         {
-            var nick = GetSource()
-                .Where(NickSpecification.NameEquals(nickName).IsSatisfiedBy())
-                .FirstOrDefault();
-
-            return nick != null;
+            return  GetSource()
+                .Where(NickSpecifications.NameMustEquals(nickName))
+                .Any();
         }
     }
 }

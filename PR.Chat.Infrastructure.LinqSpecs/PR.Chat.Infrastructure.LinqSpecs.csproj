@@ -105,6 +105,10 @@
       <Project>{577F05D4-1AF9-4B7B-ACAB-F6AB4922A496}</Project>
       <Name>PR.Chat.Infrastructure.ExpressionSerialization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PR.Chat.Infrastructure\PR.Chat.Infrastructure.csproj">
+      <Project>{3A462A1A-3EB0-425F-AD0E-B5CBDD7B4537}</Project>
+      <Name>PR.Chat.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

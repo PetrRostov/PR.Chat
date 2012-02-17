@@ -1,4 +1,5 @@
 using System;
+using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
 {

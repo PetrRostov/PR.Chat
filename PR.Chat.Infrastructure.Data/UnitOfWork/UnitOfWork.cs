@@ -33,7 +33,7 @@ namespace PR.Chat.Infrastructure.Data.UnitOfWork
             if (_isDisposed)
                 throw new ObjectDisposedException(GetType().Name);
 
-            _database.Submit();
+            _database.SubmitChanges();
 
             Dispose();
         }

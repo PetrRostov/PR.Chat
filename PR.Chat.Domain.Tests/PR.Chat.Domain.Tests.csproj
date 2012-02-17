@@ -65,6 +65,7 @@
     <Compile Include="Membership\MembershipServiceFixtures.cs" />
     <Compile Include="Nick\NickFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room\RoomFixtures.cs" />
     <Compile Include="User\UserFatoryFixtures.cs" />
     <Compile Include="User\UserFixtures.cs" />
     <Compile Include="User\UserWithSetters.cs" />
