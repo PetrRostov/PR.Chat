@@ -12,7 +12,7 @@ namespace PR.Chat.Infrastructure.Castle
 
         public WindsorContainerAdapter(IWindsorContainer windsorContainer)
         {
-            Check.NotNull(windsorContainer, "windsorContainer");
+            Require.NotNull(windsorContainer, "windsorContainer");
             _windsorContainer = windsorContainer;
         }
 
@@ -32,7 +32,7 @@ namespace PR.Chat.Infrastructure.Castle
         [DebuggerStepThrough]
         public T Resolve<T>(string name)
         {
-            Check.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
             return _windsorContainer.Resolve<T>(name);
         }
 
@@ -42,7 +42,7 @@ namespace PR.Chat.Infrastructure.Castle
             return _windsorContainer.ResolveAll<T>();
         }
 
-        protected void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (disposing && _windsorContainer != null)
                 _windsorContainer.Dispose();

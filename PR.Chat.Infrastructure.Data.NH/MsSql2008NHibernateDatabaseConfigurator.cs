@@ -11,7 +11,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public MsSql2008NHibernateDatabaseConfigurator(IConnectionStringProvider connectionStringProvider)
         {
-            Check.NotNull(connectionStringProvider, "connectionStringProvider");
+            Require.NotNull(connectionStringProvider, "connectionStringProvider");
             _connectionStringProvider = connectionStringProvider;
         }
 

@@ -19,7 +19,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         #region Implementation of IUserType
 
-        public bool Equals(object x, object y)
+        public new bool Equals(object x, object y)
         {
             bool returnvalue = false;
             if ((x != null) && (y != null))

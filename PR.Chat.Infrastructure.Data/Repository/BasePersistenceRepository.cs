@@ -10,13 +10,13 @@ namespace PR.Chat.Infrastructure.Data
 
         protected BasePersistenceRepository(IDatabaseFactory databaseFactory)
         {
-            Check.NotNull(databaseFactory, "databaseFactory");
+            Require.NotNull(databaseFactory, "databaseFactory");
             Database = databaseFactory.Create();
         }
 
         protected BasePersistenceRepository(IDatabase database)
         {
-            Check.NotNull(database, "database");
+            Require.NotNull(database, "database");
             Database = database;
         }
 

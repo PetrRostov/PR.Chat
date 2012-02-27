@@ -7,8 +7,8 @@ namespace PR.Chat.Application
     {
         public MappingKey(Type from, Type to)
         {
-            Check.NotNull(from, "from");
-            Check.NotNull(to, "to");
+            Require.NotNull(from, "from");
+            Require.NotNull(to, "to");
 
             From    = from;
             To      = to;

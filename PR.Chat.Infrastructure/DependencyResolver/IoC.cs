@@ -10,13 +10,13 @@ namespace PR.Chat.Infrastructure
 
         public static void InitializeWith(IDependencyResolver dependencyResolver)
         {
-            Check.NotNull(dependencyResolver, "dependencyResolver");
+            Require.NotNull(dependencyResolver, "dependencyResolver");
             _resolver = dependencyResolver;
         }
 
         public static void InitializeWith(IDependencyResolverFactory dependencyResolverFactory)
         {
-            Check.NotNull(dependencyResolverFactory, "dependencyResolverFactory");
+            Require.NotNull(dependencyResolverFactory, "dependencyResolverFactory");
             _resolver = dependencyResolverFactory.Create();
         }
 

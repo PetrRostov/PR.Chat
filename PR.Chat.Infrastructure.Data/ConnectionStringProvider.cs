@@ -9,7 +9,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public ConnectionStringProvider(string connectionStringName)
         {
-            Check.NotNullOrEmpty(connectionStringName, "connectionStringName");
+            Require.NotNullOrEmpty(connectionStringName, "connectionStringName");
             
             _connectionStringName = connectionStringName;
         }

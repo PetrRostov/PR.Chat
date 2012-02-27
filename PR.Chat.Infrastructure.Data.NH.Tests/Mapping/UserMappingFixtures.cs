@@ -49,7 +49,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
                 Assert.IsTrue(loadedUser.Nicks.Any(n => n.Name == nick2.Name));
 
 
-                loadedUser.SetAsRegistered();
+                loadedUser.SetIsRegistered();
 
                 tran.Commit();
             }

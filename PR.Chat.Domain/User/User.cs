@@ -2,10 +2,13 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using PR.Chat.Infrastructure;
+using PR.Chat.Infrastructure.RightContext;
 
 namespace PR.Chat.Domain
 {
+    [RightContextMember]
     public class User : IEntity<User, Guid>
     {
         private readonly Guid _id;
@@ -19,10 +22,10 @@ namespace PR.Chat.Domain
             get { return _nicks; }
         }
 
-        public virtual bool IsRegistered  { get { return _isRegistered; } }
+        public virtual bool IsRegistered { get { return _isRegistered; } }
 
 
-        protected User() 
+        protected User()
         {
             // For NHibernate
         }
@@ -50,12 +53,12 @@ namespace PR.Chat.Domain
             if (obj == null || obj.GetType() != GetType())
                 return false;
 
-            return SameIdentityAs((User) obj);
+            return SameIdentityAs((User)obj);
         }
 
         public virtual Nick CreateNick(string name)
         {
-            Check.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
 
             var nick = new Nick(this, name);
 
@@ -64,8 +67,9 @@ namespace PR.Chat.Domain
             return nick;
         }
 
-        public virtual void SetAsRegistered()
+        public virtual void SetIsRegistered()
         {
+            
             _isRegistered = true;
         }
     }

@@ -59,6 +59,15 @@
     <Compile Include="DependencyResolver\DependencyResolverFixtures.cs" />
     <Compile Include="Log\LogFixtures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightContext\ObjectTwoForRightContext.cs" />
+    <Compile Include="RightContext\ObjectOneForRightContext.cs" />
+    <Compile Include="RightContext\ObjectWithWrongRequiredPermissionAttributeInit.cs" />
+    <Compile Include="RightContext\RightContextInterceptorFixtures.cs" />
+    <Compile Include="RightContext\TestRightContextInterceptor.cs" />
+    <Compile Include="RightContext\TestRightProxyGenerator.cs" />
+    <Compile Include="RightContext\RightProxyGeneratorFixtures.cs" />
+    <Compile Include="RightContext\TestInterceptor.cs" />
+    <Compile Include="RightContext\TestPermission.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\References\Sign\pr.snk">

@@ -16,16 +16,27 @@ namespace PR.Chat.Infrastructure
         {
             Entities        = new HashSet<TEntity>();
             EntitiesLock    = new ReaderWriterLockSlim();
-            LoadEntities();
         }
 
-        protected void LoadEntities()
+        protected void EnsureEntitiesHasLoaded()
         {
-            GetAll();
+            var ensureEntitiesHasLoaded = true;
+            EntitiesLock.EnterReadLock();
+            try
+            {
+                ensureEntitiesHasLoaded = Entities.Count > 0;
+            }
+            finally
+            {
+                EntitiesLock.ExitReadLock();    
+            }
+            if (!ensureEntitiesHasLoaded)
+                GetAll();
         }
 
         public override void Add(TEntity entity)
         {
+            EnsureEntitiesHasLoaded();
             InnerRepository.Add(entity);
             AddToLocalStorage(entity);
         }
@@ -59,6 +70,7 @@ namespace PR.Chat.Infrastructure
 
         public override TEntity GetById(TKey key)
         {
+            EnsureEntitiesHasLoaded();
             TEntity entity;
             EntitiesLock.EnterReadLock();
             try
@@ -135,7 +147,7 @@ namespace PR.Chat.Infrastructure
             GC.SuppressFinalize(this);
         }
 
-        protected void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
 

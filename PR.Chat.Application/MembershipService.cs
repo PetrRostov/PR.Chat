@@ -27,13 +27,13 @@ namespace PR.Chat.Application
             IMembershipFactory membershipFactory
         )
         {
-            Check.NotNull(membershipService, "membershipService");
-            Check.NotNull(userRepository, "userRepository");
-            Check.NotNull(nickRepository, "nickRepository");
-            Check.NotNull(userFactory, "userFactory");
-            Check.NotNull(mappingProvider, "mappingProvider");
-            Check.NotNull(membershipRepository, "membershipRepository");
-            Check.NotNull(membershipFactory, "membershipFactory");
+            Require.NotNull(membershipService, "membershipService");
+            Require.NotNull(userRepository, "userRepository");
+            Require.NotNull(nickRepository, "nickRepository");
+            Require.NotNull(userFactory, "userFactory");
+            Require.NotNull(mappingProvider, "mappingProvider");
+            Require.NotNull(membershipRepository, "membershipRepository");
+            Require.NotNull(membershipFactory, "membershipFactory");
 
             _membershipService = membershipService;
             _userRepository = userRepository;

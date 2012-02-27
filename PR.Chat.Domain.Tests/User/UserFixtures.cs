@@ -89,7 +89,7 @@ namespace PR.Chat.Domain.Tests
         public void SetAsRegistered_should_work()
         {
             var user = new User(false);
-            user.SetAsRegistered();
+            user.SetIsRegistered();
 
             Assert.IsTrue(user.IsRegistered);
         }

@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using PR.Chat.Infrastructure;
-using PR.Chat.Infrastructure.Enumeration;
+using PR.Chat.Infrastructure.RightContext;
 
 namespace PR.Chat.Domain
 {
     public static class Permission
     {
+        public class ReceiveMessage : Permission<Expression<Func<Nick, Message, bool>>>
+        {
+            internal ReceiveMessage() : base(@"RECEIVE_MESSAGE") { }
+        }
+
+
         /// <summary>
         /// Check delegate is Func&lt;User, Message, bool&gt;
         /// </summary>
-        public static readonly Permission<Expression<Func<Nick, Message, bool>>> ReceiveMessage =
-            new Permission<Expression<Func<Nick, Message, bool>>>(@"RECEIVE_MESSAGE");
+        //public static readonly Permission<Expression<Func<Nick, Message, bool>>> ReceiveMessage =
+        //    new Permission<Expression<Func<Nick, Message, bool>>>(@"RECEIVE_MESSAGE");
 
         /// <summary>
         /// Check delegate is Func&lt;User, Message, bool&gt;
@@ -34,8 +39,8 @@ namespace PR.Chat.Domain
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
             return fields
-                .Select(info => info.GetValue(null))
-                .OfType<IPermission>();
+               .Select(info => info.GetValue(null))
+               .OfType<IPermission>();
         }
 
         public static IPermission GetByName(string name)

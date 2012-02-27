@@ -9,6 +9,12 @@ namespace PR.Chat.Domain
             
         }
 
+        public MembershipAlreadyExistsException(string message, Exception exception)
+            :base(message, exception)
+        {
+            
+        }
+
         public MembershipAlreadyExistsException(string message)
             : base(message)
         {

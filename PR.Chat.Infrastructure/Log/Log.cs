@@ -13,28 +13,28 @@ namespace PR.Chat.Infrastructure
         [DebuggerStepThrough]
         public static void Info(string format, params object[] args)
         {
-            Check.NotNullOrEmpty(format, "format");
+            Require.NotNullOrEmpty(format, "format");
             GetLog().Info(format, args);
         }
 
         [DebuggerStepThrough]
         public static void Debug(string format, params object[] args)
         {
-            Check.NotNullOrEmpty(format, "format");
+            Require.NotNullOrEmpty(format, "format");
             GetLog().Debug(format, args);
         }
 
         [DebuggerStepThrough]
         public static void Error(string format, params object[] args)
         {
-            Check.NotNullOrEmpty(format, "format");
+            Require.NotNullOrEmpty(format, "format");
             GetLog().Error(format, args);
         }
 
         [DebuggerStepThrough]
         public static void Error(Exception e)
         {
-            Check.NotNull(e, "e");
+            Require.NotNull(e, "e");
             GetLog().Error(e);
         }
     }

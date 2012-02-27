@@ -65,10 +65,12 @@ namespace PR.Chat.Infrastructure.Authentication
     {
     }
 
+    [Serializable]
     public class WrongPasswordException : Exception
     {
     }
 
+    [Serializable]
     public class LoginNotFoundException : Exception
     {
     }

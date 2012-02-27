@@ -1,0 +1,130 @@
+﻿<#@ template language="C#" hostspecific="True" debug="true"
+#><#@ assembly name="System.Core"
+#><#@ assembly name="System.Data.Linq"
+#><#@ assembly name="EnvDTE"
+#><#@ assembly name="Microsoft.VisualStudio.Shell"
+#><#@ assembly name="System.Xml"
+#><#@ assembly name="System.Xml.Linq"
+#><#@ import namespace="EnvDTE"
+#><#@ import namespace="System"
+#><#@ import namespace="System.Collections" 
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="System.Data.Linq"
+#><#@ import namespace="System.Data.Linq.Mapping"
+#><#@ import namespace="System.IO"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Reflection"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Xml.Linq"
+#><#@ import namespace="Microsoft.VisualStudio.TextTemplating"
+#><#@ import namespace="Microsoft.VisualStudio"
+#><#@ output extension="txt" #><# 
+
+	//System.Diagnostics.Debugger.Break(); 
+	var projectDirectory = Path.GetDirectoryName(this.Host.ResolvePath(this.Host.TemplateFile));
+	var resolve = this.Host.ResolveAssemblyReference("PR.Chat.Domain");
+	var helper = new Helper(this.Host, this.GenerationEnvironment);
+	var globalsVars = helper.CurrentProject.Globals;
+   
+   if (!File.Exists(helper.CurrentProjectAssemblyPath))
+	   return string.Empty;
+   
+   //AppDomain.CurrentDomain.SetShadowCopyFiles();
+
+   //var appDomain = AppDomain.CreateDomain("RightContextCodeGeneration");
+
+   //appDomain.Load(File.ReadAllBytes( helper.CurrentProjectAssemblyPath));
+
+   //AppDomain.Unload(appDomain);
+   
+   //var assembly = Assembly.LoadFrom(helper.CurrentProjectAssemblyPath);
+   //WriteLine( assembly.Location);
+   //var types = assembly.GetTypes();
+   //foreach (var type in types)
+   //{ 
+   //    WriteLine("Class {0}", type.FullName);
+   //    var attributes = Attribute.GetCustomAttributes(type);
+   //    foreach (var attribute in attributes)
+   //    { 
+   //       WriteLine("\t{0}", attribute.GetType().FullName);
+   //    }
+   //}
+
+   //AppDomain.Unload(AppDomain.CurrentDomain);
+   
+   //accessControl.
+   //var rules = accessControl.GetAccessRules(true,true, );
+   //foreach (var rule in rules)
+   //   WriteLine(rule.ToString());
+	 
+	
+                                                    
+                                                    
+                                                    
+                                                    
+   //if (assembly.Location != helper.CurrentProjectAssemblyPath)
+     // File.Delete(assembly.Location);
+   
+
+#><#+ 
+
+private class Helper {
+	
+	private readonly ITextTemplatingEngineHost _host;
+	private readonly StringBuilder _template;
+	private EnvDTE.DTE _dte;
+	private EnvDTE.Project _currentProject;
+	
+	public Helper (ITextTemplatingEngineHost host, StringBuilder template)
+	{
+		_host = host;
+		_template = template;
+	}
+	
+	public IServiceProvider ServiceProvider { 
+		get {
+			return (IServiceProvider)_host;
+		} 
+	}
+	
+	public EnvDTE.DTE DTE 
+	{ 
+		get 
+		{
+			if (_dte == null)
+			{
+				_dte = (EnvDTE.DTE) ServiceProvider.GetService(typeof(EnvDTE.DTE));
+	            if (_dte == null)
+	                throw new ArgumentNullException("Could not obtain DTE from host");
+			}
+			return _dte;
+		} 
+	}
+	
+	public EnvDTE.Project CurrentProject { 
+		get 
+		{
+			if (_currentProject == null)
+			{
+				_currentProject = DTE
+					.Solution.FindProjectItem(_host.TemplateFile)
+					.ContainingProject;
+			}
+			return _currentProject;
+		}
+	}
+
+   public string CurrentProjectAssemblyPath { 
+	   get
+      {
+	      string fullPath = CurrentProject.Properties.Item("FullPath").Value.ToString();
+         string outputPath = CurrentProject.ConfigurationManager.ActiveConfiguration.Properties.Item("OutputPath").Value.ToString();
+	      string outputDir = Path.Combine(fullPath, outputPath);
+         string outputFileName = CurrentProject.Properties.Item("OutputFileName").Value.ToString();
+	      string assemblyPath = Path.Combine(outputDir, outputFileName);
+
+	      return assemblyPath;            	     
+      } 
+   }	
+}
+#>

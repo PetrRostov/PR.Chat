@@ -14,7 +14,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public PerSessionFactoryNHibernateDatabase(ISessionFactory sessionFactory)
         {
-            Check.NotNull(sessionFactory, "sessionFactory");
+            Require.NotNull(sessionFactory, "sessionFactory");
             _sessionFactory = sessionFactory;
         }
 

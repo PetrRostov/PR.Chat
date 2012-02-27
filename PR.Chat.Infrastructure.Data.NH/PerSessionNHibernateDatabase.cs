@@ -10,13 +10,13 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public PerSessionNHibernateDatabase(ISessionFactory sessionFactory)
         {
-            Check.NotNull(sessionFactory, "sessionFactory");
+            Require.NotNull(sessionFactory, "sessionFactory");
             _session = sessionFactory.OpenSession();
         }
 
         public PerSessionNHibernateDatabase(ISession session)
         {
-            Check.NotNull(session, "session");
+            Require.NotNull(session, "session");
             _session = session;
         }
 

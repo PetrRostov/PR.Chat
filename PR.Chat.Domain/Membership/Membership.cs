@@ -31,9 +31,9 @@ namespace PR.Chat.Domain
 
         internal Membership(User user, string login, string password, DateTime registeredAt, bool isTemporary = false)
         {
-            Check.NotNull(user, "user");
-            Check.NotNullOrEmpty(login, "login");
-            Check.NotNullOrEmpty(password, "password");
+            Require.NotNull(user, "user");
+            Require.NotNullOrEmpty(login, "login");
+            Require.NotNullOrEmpty(password, "password");
 
             _user           = user;
             _login          = login;
@@ -49,7 +49,7 @@ namespace PR.Chat.Domain
 
         public virtual void SetPassword(string password)
         {
-            Check.NotNullOrEmpty(password, "password");
+            Require.NotNullOrEmpty(password, "password");
             _password = password;
         }
 

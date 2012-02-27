@@ -40,7 +40,7 @@ namespace PR.Chat.Domain
 
         internal Chat(Guid id, IRoomRepository roomRepository)
         {
-            Check.NotNull(roomRepository, "roomRepository");
+            Require.NotNull(roomRepository, "roomRepository");
             _id             = id;
             _roomRepository = roomRepository;
         }

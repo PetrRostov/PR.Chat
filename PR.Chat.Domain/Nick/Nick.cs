@@ -1,8 +1,10 @@
 ﻿using System;
 using PR.Chat.Infrastructure;
+using PR.Chat.Infrastructure.RightContext;
 
 namespace PR.Chat.Domain
 {
+    [RightContextMember]
     public class Nick : IEntity<Nick, Guid>
     {
         private readonly User _user;

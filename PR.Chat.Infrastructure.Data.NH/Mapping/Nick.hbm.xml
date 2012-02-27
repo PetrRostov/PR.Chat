@@ -10,7 +10,7 @@
       <id name="Id" column="Id" type="Guid" >
          <generator class="guid.comb"/>
       </id>
-      <property name="Name" column="Name" type="String" not-null="true" unique="true" update="false"/>
+      <property name="Name" column="Name" type="String" not-null="true" unique="true" update="false" index="Nick_Name_idx"/>
       <many-to-one name="User" column="UserId" foreign-key="Nick_UserId_FK" class="User" not-null="true" update="false" cascade="all" fetch="join"/>
       
    </class>

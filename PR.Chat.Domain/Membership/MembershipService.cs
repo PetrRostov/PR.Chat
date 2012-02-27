@@ -17,10 +17,10 @@ namespace PR.Chat.Domain
             IUserFactory userFactory
         )
         {
-            Check.NotNull(membershipRepository, "membershipRepository");
-            Check.NotNull(userRepository, "userRepository");
-            Check.NotNull(userFactory, "userFactory");
-            Check.NotNull(membershipFactory, "membershipFactory");
+            Require.NotNull(membershipRepository, "membershipRepository");
+            Require.NotNull(userRepository, "userRepository");
+            Require.NotNull(userFactory, "userFactory");
+            Require.NotNull(membershipFactory, "membershipFactory");
 
             _membershipRepository = membershipRepository;
             _membershipFactory = membershipFactory;
@@ -30,11 +30,11 @@ namespace PR.Chat.Domain
 
         public Membership Register(User user, string login, string password)
         {
-            Check.NotNullOrEmpty(login, "login");
-            Check.NotNullOrEmpty(password, "password");
+            Require.NotNullOrEmpty(login, "login");
+            Require.NotNullOrEmpty(password, "password");
 
 
-            user.SetAsRegistered();
+            user.SetIsRegistered();
             
             var membership = _membershipFactory.Create(user, login, password, DateTime.UtcNow);
             _membershipRepository.Add(membership);

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using PR.Chat.Infrastructure;
 using PR.Chat.Infrastructure.Enumeration;
+using PR.Chat.Infrastructure.RightContext;
 
 namespace PR.Chat.Domain
 {

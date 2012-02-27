@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PR.Chat.Infrastructure.LinqSpecs")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Depressoid.ru")]
 [assembly: AssemblyProduct("LinqSpecs")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCopyright("Copyright © Depressoid.ru")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

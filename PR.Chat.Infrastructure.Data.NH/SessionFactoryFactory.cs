@@ -9,7 +9,7 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public SessionFactoryFactory(INHibernateDatabaseConfigurator configurator)
         {
-            Check.NotNull(configurator, "configurator");
+            Require.NotNull(configurator, "configurator");
             _configurator = configurator;
         }
 

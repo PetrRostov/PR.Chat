@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PR.Chat.Presentation.Web.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Depressoid.ru")]
 [assembly: AssemblyProduct("PR.Chat.Presentation.Web.Core")]
-[assembly: AssemblyCopyright("Copyright ©  2011")]
+[assembly: AssemblyCopyright("Copyright © Depressoid.ru")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

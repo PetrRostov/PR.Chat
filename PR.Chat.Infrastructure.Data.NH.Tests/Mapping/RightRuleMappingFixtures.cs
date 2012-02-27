@@ -5,6 +5,7 @@ using System.Reflection;
 using NUnit.Framework;
 using NHibernate.Linq;
 using PR.Chat.Domain;
+using PR.Chat.Infrastructure.RightContext;
 using PR.Chat.Test.Common;
 
 namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
@@ -23,7 +24,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
         public void Save_and_load_should_work()
         {
             var ownerId = Guid.NewGuid();
-            var permission = Permission.ChangeRoomDescription;
+            var permission = "OpaPermission";
             var expression = (Expression<Func<Nick, Room, bool>>) ((nick, room) => true);
             var expiredAt = DateTime.Now.AddYears(1).Date;
 
@@ -47,7 +48,7 @@ namespace PR.Chat.Infrastructure.Data.NH.Tests.Mapping
             using (var tran = Session.BeginTransaction())
             {
                 rightRule = Session
-                    .Query<RightRule>().Where(rr => rr.OwnerId == ownerId)
+                    .Query<RightRule>().Where(rr => rr.OwnerId == ownerId && rr.Permission.ToLowerInvariant() == permission.ToLowerInvariant())
                     .First();
 
                 Assert.NotNull(rightRule);

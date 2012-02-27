@@ -10,14 +10,14 @@ namespace PR.Chat.Infrastructure.Data.UnitOfWork
 
         public UnitOfWork(IDatabase database)
         {
-            Check.NotNull(database, "database");
+            Require.NotNull(database, "database");
             _database = database;
             _database.BeginTransaction();
         }
 
         public UnitOfWork(IDatabaseFactory databaseFactory)
         {
-            Check.NotNull(databaseFactory, "databaseFactory");
+            Require.NotNull(databaseFactory, "databaseFactory");
             _database = databaseFactory.Create();
             _database.BeginTransaction();
         }

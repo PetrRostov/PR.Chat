@@ -5,6 +5,7 @@ using NHibernate;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
 using PR.Chat.Domain;
+using PR.Chat.Infrastructure.RightContext;
 
 namespace PR.Chat.Infrastructure.Data.NH
 {
@@ -12,7 +13,7 @@ namespace PR.Chat.Infrastructure.Data.NH
     {
         #region Implementation of IUserType
 
-        public bool Equals(object x, object y)
+        public new bool Equals(object x, object y)
         {
             bool returnvalue = false;
             if ((x != null) && (y != null))
@@ -31,7 +32,7 @@ namespace PR.Chat.Infrastructure.Data.NH
         {
             var permissionName = NHibernateUtil.String.NullSafeGet(rs, names) as string;
 
-            return Permission.GetByName(permissionName);
+            return Domain.Permission.GetByName(permissionName);
         }
 
         public void NullSafeSet(IDbCommand cmd, object value, int index)

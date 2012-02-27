@@ -9,7 +9,7 @@ namespace PR.Chat.Infrastructure
 
         public DecoratedRepository(IRepository<TEntity, TKey> innerRepository)
         {
-            Check.NotNull(innerRepository, "innerRepository");
+            Require.NotNull(innerRepository, "innerRepository");
             InnerRepository = innerRepository;
         }
 

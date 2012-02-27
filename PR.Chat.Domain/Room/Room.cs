@@ -72,7 +72,7 @@ namespace PR.Chat.Domain
 
         internal Room(Guid id, string name, string description, bool isTemporary = true)
         {
-            Check.NotNullOrEmpty(name, "name");
+            Require.NotNullOrEmpty(name, "name");
             _name           = name;
             _isTemporary    = isTemporary;
             _id             = id;

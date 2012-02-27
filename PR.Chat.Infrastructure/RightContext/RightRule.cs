@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace PR.Chat.Infrastructure
+namespace PR.Chat.Infrastructure.RightContext
 {
     public class RightRule : IEntity<RightRule, Guid>
     {
@@ -11,7 +11,7 @@ namespace PR.Chat.Infrastructure
 
         public virtual Guid OwnerId { get; protected set; }
 
-        public virtual IPermission Permission { get; protected set; }
+        public virtual string Permission { get; protected set; }
 
         public virtual LambdaExpression CheckExpression { get; protected set; }
 
@@ -20,32 +20,16 @@ namespace PR.Chat.Infrastructure
             //For NHibernate
         }
 
-        public RightRule(Guid id, Guid ownerId, IPermission permission, LambdaExpression checkExpression, DateTime expiredAt)
+        public RightRule(Guid id, Guid ownerId, string permission, LambdaExpression checkExpression, DateTime expiredAt)
         {
-            Check.NotNull(permission, "permission");
-            Check.NotNull(checkExpression, "checkExpression");
-
-            ExpressionShouldBeLambdaWithRightArguments(checkExpression, permission);
+            Require.NotNullOrEmpty(permission, "permission");
+            Require.NotNull(checkExpression, "checkExpression");
 
             Id              = id;
             OwnerId         = ownerId;
             Permission      = permission;
             CheckExpression = checkExpression;
             ExpiredAt       = expiredAt;
-        }
-
-        private void ExpressionShouldBeLambdaWithRightArguments(LambdaExpression checkExpression, IPermission permission)
-        {
-            var checkExpressionType = permission.CheckExpressionType;
-
-
-            if (checkExpressionType != checkExpression.GetType())
-                throw new ArgumentException(string.Format(
-                    "{0} should be lambda expression with type={1}. Permission: {2}.",
-                    "checkExpression",
-                    checkExpression.GetType(),
-                    permission.Name
-                ));
         }
 
         public virtual bool SameIdentityAs(RightRule other)

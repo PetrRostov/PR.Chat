@@ -6,7 +6,7 @@
 
         public ChatInterceptorAdapter(IInterceptor interceptor)
         {
-            Check.NotNull(interceptor, "interceptor");
+            Require.NotNull(interceptor, "interceptor");
             _interceptor = interceptor;
         }
 

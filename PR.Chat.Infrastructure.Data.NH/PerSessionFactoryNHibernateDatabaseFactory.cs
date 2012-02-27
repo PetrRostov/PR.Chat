@@ -11,19 +11,19 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         public PerSessionFactoryNHibernateDatabaseFactory(ISessionFactory sessionFactory)
         {
-            Check.NotNull(sessionFactory, "sessionFactory");
+            Require.NotNull(sessionFactory, "sessionFactory");
             _sessionFactory = sessionFactory;
         }
 
         public PerSessionFactoryNHibernateDatabaseFactory(INHibernateDatabaseConfigurator configurator)
         {
-            Check.NotNull(configurator, "configurator");
+            Require.NotNull(configurator, "configurator");
             _sessionFactory = configurator.GetConfiguration().BuildSessionFactory();
         }
 
         public PerSessionFactoryNHibernateDatabaseFactory(ISessionFactoryFactory sessionFactoryFactory)
         {
-            Check.NotNull(sessionFactoryFactory, "sessionFactoryFactory");
+            Require.NotNull(sessionFactoryFactory, "sessionFactoryFactory");
             
             _sessionFactory = sessionFactoryFactory.Create();
         }

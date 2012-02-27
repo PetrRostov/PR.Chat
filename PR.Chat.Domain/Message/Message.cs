@@ -3,7 +3,7 @@ using PR.Chat.Infrastructure;
 
 namespace PR.Chat.Domain
 {
-    public class Message: IEntity<Message, Guid>
+    public class Message : IEntity<Message, Guid>
     {
         private Guid _id;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PR.Chat.Infrastructure
+namespace PR.Chat.Infrastructure.RightContext
 {
     public interface IPermission
     {
