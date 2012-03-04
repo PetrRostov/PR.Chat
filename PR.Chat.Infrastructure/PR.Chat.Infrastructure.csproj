@@ -50,6 +50,10 @@
     <Compile Include="Authentication\IAuthenticationProviderFactory.cs" />
     <Compile Include="Bootstrapper\Bootstrapper.cs" />
     <Compile Include="Bootstrapper\IBootstrapperTask.cs" />
+    <Compile Include="Event\IEvent.cs" />
+    <Compile Include="ExecutionContext\ExecutionContext.cs" />
+    <Compile Include="ExecutionContext\IExecutionContext.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Require\Require.cs" />
     <Compile Include="DependencyResolver\IoC.cs" />
     <Compile Include="DependencyResolver\IDependencyResolver.cs" />

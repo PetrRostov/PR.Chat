@@ -40,7 +40,6 @@ namespace PR.Chat.Infrastructure.RightContext
 
         #endregion
 
-
         protected virtual IEnumerable<IInterceptor> GenerateRightInterceptors(Type type)
         {
             var rightContextMemberAttribute = Attribute.GetCustomAttribute(type, typeof (RightContextMemberAttribute));

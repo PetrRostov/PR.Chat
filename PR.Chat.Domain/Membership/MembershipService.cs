@@ -5,10 +5,10 @@ namespace PR.Chat.Domain
 {
     public class MembershipService : IMembershipService
     {
-        private readonly IMembershipRepository _membershipRepository;
         private readonly IMembershipFactory _membershipFactory;
-        private readonly IUserRepository _userRepository;
+        private readonly IMembershipRepository _membershipRepository;
         private readonly IUserFactory _userFactory;
+        private readonly IUserRepository _userRepository;
 
         public MembershipService(
             IMembershipRepository membershipRepository, 
@@ -27,6 +27,8 @@ namespace PR.Chat.Domain
             _userRepository = userRepository;
             _userFactory = userFactory;
         }
+
+        #region IMembershipService Members
 
         public Membership Register(User user, string login, string password)
         {
@@ -49,5 +51,7 @@ namespace PR.Chat.Domain
 
             return Register(user, login, password);
         }
+
+        #endregion
     }
 }

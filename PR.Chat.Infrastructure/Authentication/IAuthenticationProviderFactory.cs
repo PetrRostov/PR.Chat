@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PR.Chat.Infrastructure.Authentication
+﻿namespace PR.Chat.Infrastructure.Authentication
 {
     public interface IAuthenticationProviderFactory
     {
@@ -9,14 +7,15 @@ namespace PR.Chat.Infrastructure.Authentication
 
     public class AuthenticationProviderFactoryByDependencyResolver : IAuthenticationProviderFactory
     {
-        private readonly IDependencyResolver _dependencyResolver;
-
         private const string ByPassProviderKey = "ByPass";
+        private readonly IDependencyResolver _dependencyResolver;
 
         public AuthenticationProviderFactoryByDependencyResolver(IDependencyResolver dependencyResolver)
         {
             _dependencyResolver = dependencyResolver;
         }
+
+        #region IAuthenticationProviderFactory Members
 
         public IAuthenticationProvider Create(AuthenticationMethod method)
         {
@@ -29,5 +28,7 @@ namespace PR.Chat.Infrastructure.Authentication
             //        throw new ArgumentException();
             //}
         }
+
+        #endregion
     }
 }

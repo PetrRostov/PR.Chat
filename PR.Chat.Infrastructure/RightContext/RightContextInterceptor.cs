@@ -32,10 +32,12 @@ namespace PR.Chat.Infrastructure.RightContext
                         Options.Permission,
                         invocation.TargetType.FullName,
                         invocation.Method.Name
-                    ));
+                                                 ));
             }
 
         }
+
+        #endregion
 
         protected virtual IEnumerable<RightRule> GetRules(IEntity<Guid> ruleHolder)
         {
@@ -52,11 +54,11 @@ namespace PR.Chat.Infrastructure.RightContext
                     ruleHolder = invocation.InvocationTarget;
                     break;
                 case RuleHolder.Executor:
-                    throw new NotImplementedException();
+                    ruleHolder = GetExecutor();
                     break;
                 case RuleHolder.Argument:
-                    var position = (int)Options.RuleHolderOptions.RuleHolderArgumentPosition;
-                    ruleHolder = invocation.Arguments[position];
+                    var position    = (int)Options.RuleHolderOptions.RuleHolderArgumentPosition;
+                    ruleHolder      = invocation.Arguments[position];
                     break;
             }
 
@@ -87,11 +89,14 @@ namespace PR.Chat.Infrastructure.RightContext
             return ruleArguments;
         }
 
+        protected virtual IEntity<Guid> GetExecutor()
+        {
+            throw new NotImplementedException();
+        }
+
         protected  virtual IRightRuleRepository GetRuleRepository()
         {
             return IoC.Resolve<IRightRuleRepository>();
         }
-
-        #endregion
     }
 }

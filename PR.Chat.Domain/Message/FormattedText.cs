@@ -10,6 +10,8 @@ namespace PR.Chat.Domain
             get { return _text; }
         }
 
+        #region IValueObject<FormattedText> Members
+
         public bool SameValueAs(FormattedText other)
         {
             if (other == null)
@@ -17,6 +19,8 @@ namespace PR.Chat.Domain
 
             return Text.Equals(other.Text);
         }
+
+        #endregion
 
         public override int GetHashCode()
         {

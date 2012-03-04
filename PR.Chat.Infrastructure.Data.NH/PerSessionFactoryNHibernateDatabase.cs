@@ -7,9 +7,9 @@ namespace PR.Chat.Infrastructure.Data.NH
 {
     public class PerSessionFactoryNHibernateDatabase : NHibernateDatabaseBase
     {
-        [ThreadStatic]
-        protected static ISession CurrentSession;
 
+        protected static ThreadLocal<ISession> CurrentSessionHolder = new ThreadLocal<ISession>();
+        
         private readonly ISessionFactory _sessionFactory;
 
         public PerSessionFactoryNHibernateDatabase(ISessionFactory sessionFactory)
@@ -22,15 +22,15 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         protected override ISession GetSession()
         {
-            return CurrentSession ?? (CurrentSession = _sessionFactory.OpenSession());
+            return CurrentSessionHolder.Value ?? (CurrentSessionHolder.Value = _sessionFactory.OpenSession());
         }
 
         protected void DisposeSessionAndSetNull()
         {
-            if (CurrentSession != null)
+            if (CurrentSessionHolder.Value != null)
             {
-                CurrentSession.Dispose();
-                CurrentSession = null;
+                CurrentSessionHolder.Value.Dispose();
+                CurrentSessionHolder.Value = null;
             }
         }
 
@@ -64,8 +64,14 @@ namespace PR.Chat.Infrastructure.Data.NH
 
         protected void Dispose(bool disposing)
         {
-            if (disposing && _sessionFactory != null)
-                _sessionFactory.Dispose();
+            if (disposing)
+            {
+                if (_sessionFactory != null)
+                    _sessionFactory.Dispose();
+
+                if (CurrentSessionHolder != null)
+                    CurrentSessionHolder.Dispose();
+            }
         }
 
         ~PerSessionFactoryNHibernateDatabase()

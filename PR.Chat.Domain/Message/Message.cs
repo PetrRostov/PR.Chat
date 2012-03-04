@@ -13,12 +13,9 @@ namespace PR.Chat.Domain
             get { return _sentAt; }
         }
 
-        private FormattedText _formattedText;
-        public virtual FormattedText FormattedText
-        {
-            get { return _formattedText; }
-            set { _formattedText = value; }
-        }
+        public virtual FormattedText FormattedText { get; set; }
+
+        #region IEntity<Message,Guid> Members
 
         public Guid Id
         {
@@ -32,6 +29,8 @@ namespace PR.Chat.Domain
 
             return other.Id == Id;
         }
+
+        #endregion
 
         public override int GetHashCode()
         {

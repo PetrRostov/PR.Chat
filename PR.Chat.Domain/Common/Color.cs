@@ -16,6 +16,16 @@ namespace PR.Chat.Domain
         public byte Green;
         public byte Red;
 
+        #region IValueObject<Color> Members
+
+        public bool SameValueAs(Color other)
+        {
+            return Red == other.Red && Blue == other.Blue && Green == other.Green;
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         public uint ToUInt32()
         {
             return
@@ -34,13 +44,6 @@ namespace PR.Chat.Domain
                        };
         }
 
-
-
-        public bool SameValueAs(Color other)
-        {
-            return Red == other.Red && Blue == other.Blue && Green == other.Green;
-            throw new NotImplementedException();
-        }
 
         public override bool Equals(object obj)
         {

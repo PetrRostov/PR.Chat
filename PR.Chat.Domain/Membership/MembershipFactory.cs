@@ -6,7 +6,9 @@ namespace PR.Chat.Domain
     {
         private const string AnonymousLogin         = "Unregistered";
         private const string PasswordForTemporary   = "6C54B89E-921E-4F89-AFCF-76B6435CEA0D";
-        
+
+        #region IMembershipFactory Members
+
         public Membership Create(User user, string login, string password, DateTime registeredAt)
         {
             return new Membership(
@@ -28,5 +30,7 @@ namespace PR.Chat.Domain
                 true
             );
         }
+
+        #endregion
     }
 }

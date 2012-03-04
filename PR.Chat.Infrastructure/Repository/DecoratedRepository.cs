@@ -13,6 +13,8 @@ namespace PR.Chat.Infrastructure
             InnerRepository = innerRepository;
         }
 
+        #region IRepository<TEntity,TKey> Members
+
         [DebuggerStepThrough]
         public virtual void Add(TEntity entity)
         {
@@ -42,5 +44,7 @@ namespace PR.Chat.Infrastructure
         {
             return InnerRepository.GetAll();
         }
+
+        #endregion
     }
 }

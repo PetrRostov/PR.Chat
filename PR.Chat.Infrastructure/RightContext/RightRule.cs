@@ -5,16 +5,6 @@ namespace PR.Chat.Infrastructure.RightContext
 {
     public class RightRule : IEntity<RightRule, Guid>
     {
-        public virtual Guid Id { get; protected set; }
-
-        public virtual DateTime ExpiredAt { get; protected set; }
-
-        public virtual Guid OwnerId { get; protected set; }
-
-        public virtual string Permission { get; protected set; }
-
-        public virtual LambdaExpression CheckExpression { get; protected set; }
-
         protected RightRule()
         {
             //For NHibernate
@@ -32,10 +22,24 @@ namespace PR.Chat.Infrastructure.RightContext
             ExpiredAt       = expiredAt;
         }
 
+        public virtual DateTime ExpiredAt { get; protected set; }
+
+        public virtual Guid OwnerId { get; protected set; }
+
+        public virtual string Permission { get; protected set; }
+
+        public virtual LambdaExpression CheckExpression { get; protected set; }
+
+        #region IEntity<RightRule,Guid> Members
+
+        public virtual Guid Id { get; protected set; }
+
         public virtual bool SameIdentityAs(RightRule other)
         {
             return other != null && other.Id == Id;
         }
+
+        #endregion
 
         public override int GetHashCode()
         {

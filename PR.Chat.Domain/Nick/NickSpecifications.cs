@@ -1,5 +1,4 @@
-﻿using System;
-using PR.Chat.Infrastructure.LinqSpecs;
+﻿using PR.Chat.Infrastructure.LinqSpecs;
 
 namespace PR.Chat.Domain
 {

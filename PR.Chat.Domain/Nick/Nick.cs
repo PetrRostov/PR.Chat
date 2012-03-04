@@ -7,9 +7,9 @@ namespace PR.Chat.Domain
     [RightContextMember]
     public class Nick : IEntity<Nick, Guid>
     {
-        private readonly User _user;
-        private readonly string _name;
         private readonly Guid _id;
+        private readonly string _name;
+        private readonly User _user;
 
         protected Nick()
         {
@@ -33,6 +33,8 @@ namespace PR.Chat.Domain
             get { return _user; }
         }
 
+        #region IEntity<Nick,Guid> Members
+
         public virtual Guid Id
         {
             get {
@@ -44,6 +46,8 @@ namespace PR.Chat.Domain
         {
             return other != null && Name.Equals(other.Name, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        #endregion
 
         public override int GetHashCode()
         {

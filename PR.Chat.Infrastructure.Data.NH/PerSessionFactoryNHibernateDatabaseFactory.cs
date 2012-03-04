@@ -53,6 +53,9 @@ namespace PR.Chat.Infrastructure.Data.NH
 
             if (_database != null)
                 _database.Dispose();
+
+            if (_sessionFactory != null)
+                _sessionFactory.Dispose();
         }
 
         ~PerSessionFactoryNHibernateDatabaseFactory()

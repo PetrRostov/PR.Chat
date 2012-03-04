@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PR.Chat.Infrastructure
+﻿namespace PR.Chat.Infrastructure
 {
     public interface IProxyBuilder
     {

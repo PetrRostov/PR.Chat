@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using PR.Chat.Infrastructure;
 using PR.Chat.Infrastructure.RightContext;
 
@@ -12,17 +9,8 @@ namespace PR.Chat.Domain
     public class User : IEntity<User, Guid>
     {
         private readonly Guid _id;
-        private bool _isRegistered;
         private readonly ICollection<Nick> _nicks = new HashSet<Nick>();
-
-        public virtual Guid Id { get { return _id; } }
-
-        public virtual ICollection<Nick> Nicks
-        {
-            get { return _nicks; }
-        }
-
-        public virtual bool IsRegistered { get { return _isRegistered; } }
+        private bool _isRegistered;
 
 
         protected User()
@@ -36,12 +24,24 @@ namespace PR.Chat.Domain
             //_id = Guid.NewGuid();
         }
 
+        public virtual ICollection<Nick> Nicks
+        {
+            get { return _nicks; }
+        }
+
+        public virtual bool IsRegistered { get { return _isRegistered; } }
+
+        #region IEntity<User,Guid> Members
+
+        public virtual Guid Id { get { return _id; } }
+
 
         public virtual bool SameIdentityAs(User other)
         {
-            return other != null && other.Id == this.Id;
+            return other != null && other.Id == Id;
         }
 
+        #endregion
 
         public override int GetHashCode()
         {

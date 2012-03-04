@@ -1,4 +1,4 @@
-﻿using System.CodeDom;
+﻿using System.CodeDom.Compiler;
 using System.IO;
 
 namespace PR.Chat.Domain
@@ -7,7 +7,7 @@ namespace PR.Chat.Domain
    {
       public CodeDomExample()
       {
-         var provider = System.CodeDom.Compiler.CodeDomProvider.CreateProvider("CSharp");
+         var provider = CodeDomProvider.CreateProvider("CSharp");
 
          provider.Parse(new StreamReader(""));
       }

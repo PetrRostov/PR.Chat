@@ -8,7 +8,7 @@ using PR.Chat.Application;
 namespace PR.Chat.Presentation.Services
 {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class MembershipService : IMembershipService, IDisposable
     {
         private readonly Application.IMembershipService _membershipService;

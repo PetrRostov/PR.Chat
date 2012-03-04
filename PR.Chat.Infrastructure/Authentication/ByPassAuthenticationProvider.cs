@@ -14,6 +14,8 @@ namespace PR.Chat.Infrastructure.Authentication
             _accountService = accountService;
         }
 
+        #region IAuthenticationProvider Members
+
         public AuthenticationResponse Authenticate(AuthenticationRequest authenticationRequest)
         {
             var fields = authenticationRequest.Properties;
@@ -42,6 +44,8 @@ namespace PR.Chat.Infrastructure.Authentication
                 return AuthenticationResponse.Error("WrongPassword");
             }
         }
+
+        #endregion
     }
 
     public interface IAccountService

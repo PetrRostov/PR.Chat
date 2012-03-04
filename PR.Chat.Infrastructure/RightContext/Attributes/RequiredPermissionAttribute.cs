@@ -5,10 +5,35 @@ namespace PR.Chat.Infrastructure.RightContext
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class RequiredPermissionAttribute : Attribute
     {
-        protected readonly ArgumentPosition _ruleHolderArgumentPosition;
         protected readonly string[] _arguments;
-        protected RuleHolder _ruleHolder;
         protected readonly string _requiredPermission;
+        protected readonly ArgumentPosition _ruleHolderArgumentPosition;
+        protected RuleHolder _ruleHolder;
+
+        public RequiredPermissionAttribute(string requiredPermission)
+            : this(requiredPermission, RuleHolder.MethodOwner, ArgumentPosition.WithoutPosition)
+        {
+            
+        }
+
+        public RequiredPermissionAttribute(string requiredPermission, params string[] arguments)
+            : this(requiredPermission, RuleHolder.MethodOwner, ArgumentPosition.WithoutPosition, arguments)
+        {
+
+        }
+
+        public RequiredPermissionAttribute(
+            string requiredPermission, 
+            RuleHolder ruleHolder, 
+            ArgumentPosition ruleHolderArgumentPosition,
+            params string[] arguments
+            )
+        {
+            _ruleHolderArgumentPosition     = ruleHolderArgumentPosition;
+            _arguments                      = arguments;
+            _ruleHolder                     = ruleHolder;
+            _requiredPermission             = requiredPermission;
+        }
 
         public string[] Arguments
         {
@@ -30,31 +55,6 @@ namespace PR.Chat.Infrastructure.RightContext
         public string RequiredPermission
         {
             get { return _requiredPermission; }
-        }
-
-        public RequiredPermissionAttribute(string requiredPermission)
-            : this(requiredPermission, RuleHolder.MethodOwner, ArgumentPosition.WithoutPosition)
-        {
-            
-        }
-
-        public RequiredPermissionAttribute(string requiredPermission, params string[] arguments)
-            : this(requiredPermission, RuleHolder.MethodOwner, ArgumentPosition.WithoutPosition, arguments)
-        {
-
-        }
-
-        public RequiredPermissionAttribute(
-            string requiredPermission, 
-            RuleHolder ruleHolder, 
-            ArgumentPosition ruleHolderArgumentPosition,
-            params string[] arguments
-        )
-        {
-            _ruleHolderArgumentPosition     = ruleHolderArgumentPosition;
-            _arguments                      = arguments;
-            _ruleHolder                     = ruleHolder;
-            _requiredPermission             = requiredPermission;
         }
     }
 }

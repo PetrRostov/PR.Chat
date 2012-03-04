@@ -6,6 +6,7 @@ namespace PR.Chat.Domain
     public class Membership : IEntity<Membership, Guid>
     {
         private readonly Guid _id;
+        private readonly bool _isTemporary;
 
         private readonly string _login;
 
@@ -14,20 +15,6 @@ namespace PR.Chat.Domain
         private readonly User _user;
 
         private string _password;
-
-        private readonly bool _isTemporary;
-
-        public virtual DateTime RegisteredAt { get { return _registeredAt; } }
-
-        public virtual DateTime? LastLogin { get; set; }
-
-        public virtual string Login { get { return _login; } }
-
-        public virtual Guid Id { get { return _id; } }
-
-        public virtual User User { get { return _user; } }
-
-        public virtual bool IsTemporary {get { return _isTemporary; }}
 
         internal Membership(User user, string login, string password, DateTime registeredAt, bool isTemporary = false)
         {
@@ -42,6 +29,32 @@ namespace PR.Chat.Domain
             _password       = password;
         }
 
+        protected Membership()
+        {
+            // for NHibernate
+        }
+
+        public virtual DateTime RegisteredAt { get { return _registeredAt; } }
+
+        public virtual DateTime? LastLogin { get; set; }
+
+        public virtual string Login { get { return _login; } }
+
+        public virtual User User { get { return _user; } }
+
+        public virtual bool IsTemporary {get { return _isTemporary; }}
+
+        #region IEntity<Membership,Guid> Members
+
+        public virtual Guid Id { get { return _id; } }
+
+        public virtual bool SameIdentityAs(Membership other)
+        {
+            return other != null && other.Login.Equals(Login, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        #endregion
+
         public virtual bool IsPasswordEqual(string password)
         {
             return _password == password;
@@ -51,18 +64,6 @@ namespace PR.Chat.Domain
         {
             Require.NotNullOrEmpty(password, "password");
             _password = password;
-        }
-
-        protected Membership()
-        {
-            // for NHibernate
-        }
-
-        
-
-        public virtual bool SameIdentityAs(Membership other)
-        {
-            return other != null && other.Login.Equals(Login, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public override int GetHashCode()

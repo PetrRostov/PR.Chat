@@ -21,6 +21,12 @@
             
         }
 
+        public bool Success { get; private set;}
+
+        public string ErrorMessage { get; private set;}
+
+        public IAccount Account { get; private set;}
+
         public static AuthenticationResponse OK(IAccount account)
         {
             return new AuthenticationResponse(account);
@@ -30,11 +36,5 @@
         {
             return new AuthenticationResponse(false, null, errorMessage);
         }
-
-        public bool Success { get; private set;}
-
-        public string ErrorMessage { get; private set;}
-
-        public IAccount Account { get; private set;}
     }
 }
