@@ -1,7 +1,7 @@
 ﻿using System;
 using PR.Chat.Infrastructure.UnitOfWork;
 
-namespace PR.Chat.Infrastructure.Data.UnitOfWork
+namespace PR.Chat.Infrastructure.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -26,6 +26,8 @@ namespace PR.Chat.Infrastructure.Data.UnitOfWork
         {
             if (!_isDisposed)
                 _isDisposed = true;
+
+            _database.Rollback();
         }
 
         public void Commit()

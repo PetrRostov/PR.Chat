@@ -15,6 +15,7 @@ using PR.Chat.Infrastructure.UnitOfWork;
 using PR.Chat.Presentation.Services;
 using PR.Chat.Presentation.Web.Core;
 using MembershipService = PR.Chat.Application.MembershipService;
+using UnitOfWork = PR.Chat.Infrastructure.Data.UnitOfWork;
 
 namespace PR.Chat.Presentation.Web
 {
@@ -160,13 +161,13 @@ namespace PR.Chat.Presentation.Web
         {
             yield return Component
                 .For<IUnitOfWork>()
-                .ImplementedBy<Infrastructure.Data.UnitOfWork.UnitOfWork>()
+                .ImplementedBy<UnitOfWork>()
                 .DependsOn(Dependency.OnComponent(typeof(IDatabaseFactory), "DatabaseFactory"))
                 .LifestyleTransient();
 
             yield return Component
                 .For<IUnitOfWork>()
-                .ImplementedBy<Infrastructure.Data.UnitOfWork.UnitOfWork>()
+                .ImplementedBy<UnitOfWork>()
                 .DependsOn(Dependency.OnComponent(typeof(IDatabaseFactory), "SingletonDatabaseFactory"))
                 .LifestyleTransient()
                 .Named("SingletonUnitOfWork");

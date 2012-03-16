@@ -16,27 +16,28 @@ namespace PR.Chat.Infrastructure.Data.Tests
             database = new Mock<IDatabase>();
             database.Setup(d => d.SubmitChanges()).Verifiable();
             database.Setup(d => d.BeginTransaction()).Verifiable();
+            database.Setup(d => d.Rollback()).Verifiable();
         }
 
 
         [Test]
         public void Constructor_should_throw_exception_if_arguments_are_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new UnitOfWork.UnitOfWork((IDatabaseFactory)null));
-            Assert.Throws<ArgumentNullException>(() => new UnitOfWork.UnitOfWork((IDatabase)null));
+            Assert.Throws<ArgumentNullException>(() => new UnitOfWork((IDatabaseFactory)null));
+            Assert.Throws<ArgumentNullException>(() => new UnitOfWork((IDatabase)null));
         }
 
         [Test]
         public void Contructor_should_use_IDatabase_BeginTransaction()
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(database.Object);
+            var unitOfWork = new UnitOfWork(database.Object);
             database.Verify(d => d.BeginTransaction());
         }
 
         [Test]
         public void Commit_should_use_IDatabase_Submit()
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(database.Object);
+            var unitOfWork = new UnitOfWork(database.Object);
             unitOfWork.Commit();
             database.Verify(d => d.SubmitChanges());
         }
@@ -44,7 +45,7 @@ namespace PR.Chat.Infrastructure.Data.Tests
         [Test]
         public void Commit_should_throw_exception_if_UnitOfWork_disposed()
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(database.Object);
+            var unitOfWork = new UnitOfWork(database.Object);
             unitOfWork.Dispose();
             Assert.Throws<ObjectDisposedException>(unitOfWork.Commit);
         }
@@ -52,9 +53,17 @@ namespace PR.Chat.Infrastructure.Data.Tests
         [Test]
         public void Commit_should_throw_exception_if_called_second_time()
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(database.Object);
+            var unitOfWork = new UnitOfWork(database.Object);
             unitOfWork.Commit();
             Assert.Throws<ObjectDisposedException>(unitOfWork.Commit);
+        }
+
+        [Test]
+        public void Dispose_should_use_IDatabase_Rollback()
+        {
+            var unitOfWork = new UnitOfWork(database.Object);
+            unitOfWork.Dispose();
+            database.Verify(d => d.Rollback());
         }
 
     }

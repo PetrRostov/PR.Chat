@@ -2,15 +2,20 @@
 
 namespace PR.Chat.Infrastructure
 {
-    public class Event : IEntity<Guid>
+    public interface IEvent
     {
-        #region Implementation of IEntity<out Guid>
+        Guid Id { get; }
 
-        public Guid Id
-        {
-            get { throw new NotImplementedException(); }
-        }
+        Guid SourceId { get; }
 
-        #endregion
+        Guid CommitId { get; }
+
+        int Version { get; }
+
+        DateTime OccuredAt { get; }
+
+        long SequenceNumber { get; }
+
+        object Payload { get; }
     }
 }

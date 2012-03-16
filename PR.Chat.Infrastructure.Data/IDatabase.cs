@@ -13,6 +13,7 @@ namespace PR.Chat.Infrastructure.Data
 
         TKey AddOnSubmit<T, TKey>(IEntity<T, TKey> entity);
 
+        void Rollback();
         void SubmitChanges();
         void BeginTransaction();
     }

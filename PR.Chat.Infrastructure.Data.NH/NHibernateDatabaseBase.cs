@@ -32,6 +32,8 @@ namespace PR.Chat.Infrastructure.Data.NH
             return (TKey)key;
         }
 
+        public abstract void Rollback();
+
         public abstract void SubmitChanges();
 
         public abstract void BeginTransaction();

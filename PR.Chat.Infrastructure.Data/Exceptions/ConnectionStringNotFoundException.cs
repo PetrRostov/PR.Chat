@@ -2,7 +2,7 @@
 
 namespace PR.Chat.Infrastructure.Data
 {
-    public class ConnectionStringNotFoundException : Exception
+    public class ConnectionStringNotFoundException : DataStorageException
     {
          
     }

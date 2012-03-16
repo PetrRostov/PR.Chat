@@ -25,7 +25,16 @@ namespace PR.Chat.Infrastructure.Data.NH
             return _session;
         }
 
-        
+
+        public override void Rollback()
+        {
+            var transaction = GetSession().Transaction;
+            if (transaction != null && transaction.IsActive)
+                transaction.Rollback();
+            else
+                throw new TransactionInactiveException();
+        }
+
         public override void SubmitChanges()
         {
             var transaction = GetSession().Transaction;

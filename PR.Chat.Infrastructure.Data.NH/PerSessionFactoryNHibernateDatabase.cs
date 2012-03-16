@@ -34,26 +34,29 @@ namespace PR.Chat.Infrastructure.Data.NH
             }
         }
 
+        public override void Rollback()
+        {
+            RequireSessionAndTransaction();
+
+            GetSession().Transaction.Rollback();
+            
+            DisposeSessionAndSetNull();
+        }
+
         public override void SubmitChanges()
         {
-            var transaction = GetSession().Transaction;
-            if (transaction != null && transaction.IsActive)
-                transaction.Commit();
-            else
-                throw new TransactionInactiveException();
+            RequireSessionAndTransaction();
+
+            GetSession().Transaction.Commit();
 
             DisposeSessionAndSetNull();
         }
 
         public override void BeginTransaction()
         {
-            var session = GetSession();
+            RequireEmptySession();
 
-            var transaction = session.Transaction;
-            if (transaction != null && transaction.IsActive)
-                throw new TransactionAlreadyStartedException();
-
-            session.BeginTransaction();
+            GetSession().BeginTransaction();
         }
 
         public override void Dispose()
@@ -80,5 +83,27 @@ namespace PR.Chat.Infrastructure.Data.NH
         }
 
         #endregion
+
+        private void RequireSessionAndTransaction()
+        {
+            if (
+                CurrentSessionHolder.IsValueCreated 
+                && CurrentSessionHolder.Value != null
+                && CurrentSessionHolder.Value.Transaction != null
+                && CurrentSessionHolder.Value.Transaction.IsActive
+            )
+                return;
+
+            throw new TransactionInactiveException();
+        }
+
+        private void RequireEmptySession()
+        {
+            if (!CurrentSessionHolder.IsValueCreated || CurrentSessionHolder.Value == null)
+                return;
+
+            throw new TransactionAlreadyStartedException();
+        }
+
     }
 }
